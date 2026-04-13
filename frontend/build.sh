@@ -13,6 +13,10 @@ flutter config --no-analytics
 # Pre-download binaries specifically for web
 flutter precache --web
 
+# Create dummy env files to satisfy pubspec.yaml asset requirements
+touch .env
+touch .env.example
+
 # Get dependencies and build
 flutter pub get
 flutter build web --release
