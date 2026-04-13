@@ -11,7 +11,7 @@ class MainScaffold extends StatelessWidget {
       case '/dashboard': return 0;
       case '/goals': return 1;
       case '/pomodoro': return 2;
-      case '/journal': return 3;
+      case '/checkin': return 3;
       case '/semester': return 4;
       default: return 0;
     }
@@ -46,7 +46,7 @@ class MainScaffold extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(Icons.dashboard_rounded), label: 'Dashboard'),
             BottomNavigationBarItem(icon: Icon(Icons.check_circle_rounded), label: 'Goals'),
             BottomNavigationBarItem(icon: Icon(Icons.timer_rounded), label: 'Pomodoro'),
-            BottomNavigationBarItem(icon: Icon(Icons.book_rounded), label: 'Journal'),
+            BottomNavigationBarItem(icon: Icon(Icons.nightlight_round), label: 'Check-in'),
             BottomNavigationBarItem(icon: Icon(Icons.school_rounded), label: 'Semester'),
           ],
           onTap: (index) {
@@ -54,7 +54,7 @@ class MainScaffold extends StatelessWidget {
               case 0: context.go('/dashboard'); break;
               case 1: context.go('/goals'); break;
               case 2: context.go('/pomodoro'); break;
-              case 3: context.go('/journal'); break;
+              case 3: context.go('/checkin'); break;
               case 4: context.go('/semester'); break;
             }
           },

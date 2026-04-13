@@ -20,8 +20,20 @@ mixin _$DashboardState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double todayScore, bool isActiveDay,
-            bool isStrongDay, int currentStreak, int focusMinutesToday)
+    required TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)
         loaded,
     required TResult Function(String message) error,
   }) =>
@@ -30,8 +42,20 @@ mixin _$DashboardState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult? Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult? Function(String message)? error,
   }) =>
@@ -40,8 +64,20 @@ mixin _$DashboardState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -132,8 +168,20 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double todayScore, bool isActiveDay,
-            bool isStrongDay, int currentStreak, int focusMinutesToday)
+    required TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -145,8 +193,20 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult? Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -158,8 +218,20 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -252,8 +324,20 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double todayScore, bool isActiveDay,
-            bool isStrongDay, int currentStreak, int focusMinutesToday)
+    required TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -265,8 +349,20 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult? Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -278,8 +374,20 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -343,7 +451,15 @@ abstract class _$$LoadedImplCopyWith<$Res> {
       bool isActiveDay,
       bool isStrongDay,
       int currentStreak,
-      int focusMinutesToday});
+      int focusMinutesToday,
+      List<double> last7Scores,
+      int completedBig3,
+      int totalBig3,
+      int pomodoroCount,
+      int taskCount,
+      int shieldCount,
+      double momentumPct,
+      Map<String, int> subjectDistribution});
 }
 
 /// @nodoc
@@ -362,6 +478,14 @@ class __$$LoadedImplCopyWithImpl<$Res>
     Object? isStrongDay = null,
     Object? currentStreak = null,
     Object? focusMinutesToday = null,
+    Object? last7Scores = null,
+    Object? completedBig3 = null,
+    Object? totalBig3 = null,
+    Object? pomodoroCount = null,
+    Object? taskCount = null,
+    Object? shieldCount = null,
+    Object? momentumPct = null,
+    Object? subjectDistribution = null,
   }) {
     return _then(_$LoadedImpl(
       todayScore: null == todayScore
@@ -384,6 +508,38 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value.focusMinutesToday
           : focusMinutesToday // ignore: cast_nullable_to_non_nullable
               as int,
+      last7Scores: null == last7Scores
+          ? _value._last7Scores
+          : last7Scores // ignore: cast_nullable_to_non_nullable
+              as List<double>,
+      completedBig3: null == completedBig3
+          ? _value.completedBig3
+          : completedBig3 // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalBig3: null == totalBig3
+          ? _value.totalBig3
+          : totalBig3 // ignore: cast_nullable_to_non_nullable
+              as int,
+      pomodoroCount: null == pomodoroCount
+          ? _value.pomodoroCount
+          : pomodoroCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      taskCount: null == taskCount
+          ? _value.taskCount
+          : taskCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      shieldCount: null == shieldCount
+          ? _value.shieldCount
+          : shieldCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      momentumPct: null == momentumPct
+          ? _value.momentumPct
+          : momentumPct // ignore: cast_nullable_to_non_nullable
+              as double,
+      subjectDistribution: null == subjectDistribution
+          ? _value._subjectDistribution
+          : subjectDistribution // ignore: cast_nullable_to_non_nullable
+              as Map<String, int>,
     ));
   }
 }
@@ -396,7 +552,17 @@ class _$LoadedImpl implements _Loaded {
       required this.isActiveDay,
       required this.isStrongDay,
       required this.currentStreak,
-      required this.focusMinutesToday});
+      required this.focusMinutesToday,
+      final List<double> last7Scores = const [],
+      this.completedBig3 = 0,
+      this.totalBig3 = 0,
+      this.pomodoroCount = 0,
+      this.taskCount = 0,
+      this.shieldCount = 0,
+      this.momentumPct = 0.0,
+      final Map<String, int> subjectDistribution = const {}})
+      : _last7Scores = last7Scores,
+        _subjectDistribution = subjectDistribution;
 
   @override
   final double todayScore;
@@ -408,10 +574,46 @@ class _$LoadedImpl implements _Loaded {
   final int currentStreak;
   @override
   final int focusMinutesToday;
+  final List<double> _last7Scores;
+  @override
+  @JsonKey()
+  List<double> get last7Scores {
+    if (_last7Scores is EqualUnmodifiableListView) return _last7Scores;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_last7Scores);
+  }
+
+  @override
+  @JsonKey()
+  final int completedBig3;
+  @override
+  @JsonKey()
+  final int totalBig3;
+  @override
+  @JsonKey()
+  final int pomodoroCount;
+  @override
+  @JsonKey()
+  final int taskCount;
+  @override
+  @JsonKey()
+  final int shieldCount;
+  @override
+  @JsonKey()
+  final double momentumPct;
+  final Map<String, int> _subjectDistribution;
+  @override
+  @JsonKey()
+  Map<String, int> get subjectDistribution {
+    if (_subjectDistribution is EqualUnmodifiableMapView)
+      return _subjectDistribution;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_subjectDistribution);
+  }
 
   @override
   String toString() {
-    return 'DashboardState.loaded(todayScore: $todayScore, isActiveDay: $isActiveDay, isStrongDay: $isStrongDay, currentStreak: $currentStreak, focusMinutesToday: $focusMinutesToday)';
+    return 'DashboardState.loaded(todayScore: $todayScore, isActiveDay: $isActiveDay, isStrongDay: $isStrongDay, currentStreak: $currentStreak, focusMinutesToday: $focusMinutesToday, last7Scores: $last7Scores, completedBig3: $completedBig3, totalBig3: $totalBig3, pomodoroCount: $pomodoroCount, taskCount: $taskCount, shieldCount: $shieldCount, momentumPct: $momentumPct, subjectDistribution: $subjectDistribution)';
   }
 
   @override
@@ -428,12 +630,41 @@ class _$LoadedImpl implements _Loaded {
             (identical(other.currentStreak, currentStreak) ||
                 other.currentStreak == currentStreak) &&
             (identical(other.focusMinutesToday, focusMinutesToday) ||
-                other.focusMinutesToday == focusMinutesToday));
+                other.focusMinutesToday == focusMinutesToday) &&
+            const DeepCollectionEquality()
+                .equals(other._last7Scores, _last7Scores) &&
+            (identical(other.completedBig3, completedBig3) ||
+                other.completedBig3 == completedBig3) &&
+            (identical(other.totalBig3, totalBig3) ||
+                other.totalBig3 == totalBig3) &&
+            (identical(other.pomodoroCount, pomodoroCount) ||
+                other.pomodoroCount == pomodoroCount) &&
+            (identical(other.taskCount, taskCount) ||
+                other.taskCount == taskCount) &&
+            (identical(other.shieldCount, shieldCount) ||
+                other.shieldCount == shieldCount) &&
+            (identical(other.momentumPct, momentumPct) ||
+                other.momentumPct == momentumPct) &&
+            const DeepCollectionEquality()
+                .equals(other._subjectDistribution, _subjectDistribution));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, todayScore, isActiveDay,
-      isStrongDay, currentStreak, focusMinutesToday);
+  int get hashCode => Object.hash(
+      runtimeType,
+      todayScore,
+      isActiveDay,
+      isStrongDay,
+      currentStreak,
+      focusMinutesToday,
+      const DeepCollectionEquality().hash(_last7Scores),
+      completedBig3,
+      totalBig3,
+      pomodoroCount,
+      taskCount,
+      shieldCount,
+      momentumPct,
+      const DeepCollectionEquality().hash(_subjectDistribution));
 
   @JsonKey(ignore: true)
   @override
@@ -446,13 +677,37 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double todayScore, bool isActiveDay,
-            bool isStrongDay, int currentStreak, int focusMinutesToday)
+    required TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)
         loaded,
     required TResult Function(String message) error,
   }) {
     return loaded(
-        todayScore, isActiveDay, isStrongDay, currentStreak, focusMinutesToday);
+        todayScore,
+        isActiveDay,
+        isStrongDay,
+        currentStreak,
+        focusMinutesToday,
+        last7Scores,
+        completedBig3,
+        totalBig3,
+        pomodoroCount,
+        taskCount,
+        shieldCount,
+        momentumPct,
+        subjectDistribution);
   }
 
   @override
@@ -460,13 +715,37 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult? Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(
-        todayScore, isActiveDay, isStrongDay, currentStreak, focusMinutesToday);
+        todayScore,
+        isActiveDay,
+        isStrongDay,
+        currentStreak,
+        focusMinutesToday,
+        last7Scores,
+        completedBig3,
+        totalBig3,
+        pomodoroCount,
+        taskCount,
+        shieldCount,
+        momentumPct,
+        subjectDistribution);
   }
 
   @override
@@ -474,15 +753,39 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(todayScore, isActiveDay, isStrongDay, currentStreak,
-          focusMinutesToday);
+      return loaded(
+          todayScore,
+          isActiveDay,
+          isStrongDay,
+          currentStreak,
+          focusMinutesToday,
+          last7Scores,
+          completedBig3,
+          totalBig3,
+          pomodoroCount,
+          taskCount,
+          shieldCount,
+          momentumPct,
+          subjectDistribution);
     }
     return orElse();
   }
@@ -531,13 +834,29 @@ abstract class _Loaded implements DashboardState {
       required final bool isActiveDay,
       required final bool isStrongDay,
       required final int currentStreak,
-      required final int focusMinutesToday}) = _$LoadedImpl;
+      required final int focusMinutesToday,
+      final List<double> last7Scores,
+      final int completedBig3,
+      final int totalBig3,
+      final int pomodoroCount,
+      final int taskCount,
+      final int shieldCount,
+      final double momentumPct,
+      final Map<String, int> subjectDistribution}) = _$LoadedImpl;
 
   double get todayScore;
   bool get isActiveDay;
   bool get isStrongDay;
   int get currentStreak;
   int get focusMinutesToday;
+  List<double> get last7Scores;
+  int get completedBig3;
+  int get totalBig3;
+  int get pomodoroCount;
+  int get taskCount;
+  int get shieldCount;
+  double get momentumPct;
+  Map<String, int> get subjectDistribution;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -609,8 +928,20 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(double todayScore, bool isActiveDay,
-            bool isStrongDay, int currentStreak, int focusMinutesToday)
+    required TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)
         loaded,
     required TResult Function(String message) error,
   }) {
@@ -622,8 +953,20 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult? Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult? Function(String message)? error,
   }) {
@@ -635,8 +978,20 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(double todayScore, bool isActiveDay, bool isStrongDay,
-            int currentStreak, int focusMinutesToday)?
+    TResult Function(
+            double todayScore,
+            bool isActiveDay,
+            bool isStrongDay,
+            int currentStreak,
+            int focusMinutesToday,
+            List<double> last7Scores,
+            int completedBig3,
+            int totalBig3,
+            int pomodoroCount,
+            int taskCount,
+            int shieldCount,
+            double momentumPct,
+            Map<String, int> subjectDistribution)?
         loaded,
     TResult Function(String message)? error,
     required TResult orElse(),

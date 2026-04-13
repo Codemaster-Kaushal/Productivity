@@ -8,9 +8,12 @@ import '../../features/auth/ui/signup_screen.dart';
 import '../../features/dashboard/ui/dashboard_screen.dart';
 import '../../features/goals/ui/goals_screen.dart';
 import '../../features/pomodoro/ui/pomodoro_screen.dart';
+import '../../features/checkin/ui/checkin_screen.dart';
 import '../../features/journal/ui/journal_screen.dart';
 import '../../features/scores/ui/scores_screen.dart';
 import '../../features/semester/ui/semester_screen.dart';
+import '../../features/weekly_budget/ui/weekly_budget_screen.dart';
+import '../../features/friends/ui/streak_board_screen.dart';
 import 'main_scaffold.dart';
 
 final appRouter = GoRouter(
@@ -31,9 +34,12 @@ final appRouter = GoRouter(
         GoRoute(path: '/dashboard', builder: (_, __) => const DashboardScreen()),
         GoRoute(path: '/goals', builder: (_, __) => const GoalsScreen()),
         GoRoute(path: '/pomodoro', builder: (_, __) => const PomodoroScreen()),
+        GoRoute(path: '/checkin', builder: (_, __) => const CheckinScreen()),
         GoRoute(path: '/journal', builder: (_, __) => const JournalScreen()),
         GoRoute(path: '/scores', builder: (_, __) => const ScoresScreen()),
         GoRoute(path: '/semester', builder: (_, __) => const SemesterScreen()),
+        GoRoute(path: '/budget', builder: (_, __) => const WeeklyBudgetScreen()),
+        GoRoute(path: '/friends', builder: (_, __) => const StreakBoardScreen()),
       ],
     ),
   ],

@@ -55,5 +55,12 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Build artifacts
+frontend/build/
+**/build/
+
 # Environment
 .env
+.env.example
+frontend/.env
+frontend/.env.example

@@ -18,6 +18,15 @@ import 'features/scores/data/scores_repository.dart';
 import 'features/scores/cubit/scores_cubit.dart';
 import 'features/semester/data/semester_repository.dart';
 import 'features/semester/cubit/semester_cubit.dart';
+import 'features/checkin/data/checkin_repository.dart';
+import 'features/checkin/cubit/checkin_cubit.dart';
+import 'features/quick_capture/data/quick_capture_repository.dart';
+import 'features/quick_capture/cubit/quick_capture_cubit.dart';
+import 'features/audio/cubit/audio_cubit.dart';
+import 'features/weekly_budget/data/weekly_budget_repository.dart';
+import 'features/weekly_budget/cubit/weekly_budget_cubit.dart';
+import 'features/friends/data/friends_repository.dart';
+import 'features/friends/cubit/friends_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +61,10 @@ Future<void> main() async {
       RepositoryProvider<JournalRepository>(create: (context) => JournalRepository()),
       RepositoryProvider<ScoresRepository>(create: (context) => ScoresRepository()),
       RepositoryProvider<SemesterRepository>(create: (context) => SemesterRepository()),
+      RepositoryProvider<CheckinRepository>(create: (context) => CheckinRepository()),
+      RepositoryProvider<QuickCaptureRepository>(create: (context) => QuickCaptureRepository()),
+      RepositoryProvider<WeeklyBudgetRepository>(create: (context) => WeeklyBudgetRepository()),
+      RepositoryProvider<FriendsRepository>(create: (context) => FriendsRepository()),
     ],
     child: MultiBlocProvider(
       providers: [
@@ -62,6 +75,11 @@ Future<void> main() async {
         BlocProvider(create: (context) => JournalCubit(context.read<JournalRepository>())),
         BlocProvider(create: (context) => ScoresCubit(context.read<ScoresRepository>())),
         BlocProvider(create: (context) => SemesterCubit(context.read<SemesterRepository>())),
+        BlocProvider(create: (context) => CheckinCubit(context.read<CheckinRepository>())),
+        BlocProvider(create: (context) => QuickCaptureCubit(context.read<QuickCaptureRepository>())),
+        BlocProvider(create: (context) => AudioCubit()),
+        BlocProvider(create: (context) => WeeklyBudgetCubit(context.read<WeeklyBudgetRepository>())),
+        BlocProvider(create: (context) => FriendsCubit(context.read<FriendsRepository>())),
       ],
       child: const ProductivityApp(),
     ),
@@ -89,6 +107,7 @@ class ProductivityApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Productivity',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.dark(
           primary: const Color(0xFF6C63FF),
