@@ -9,7 +9,7 @@ class DioClient {
   DioClient() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: dotenv.env['API_BASE_URL'] ?? 'https://api.productivity.local',
+        baseUrl: dotenv.env['API_BASE_URL'] ?? 'https://productivity-x1pm.onrender.com',
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         headers: {'Content-Type': 'application/json'},
