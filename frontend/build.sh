@@ -13,8 +13,11 @@ flutter config --no-analytics
 # Pre-download binaries specifically for web
 flutter precache --web
 
-# Create dummy env files to satisfy pubspec.yaml asset requirements
-touch .env
+# Create dummy env files and populate with Vercel environment variables
+echo "SUPABASE_URL=$SUPABASE_URL" > .env
+echo "SUPABASE_KEY=$SUPABASE_KEY" >> .env
+echo "SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY" >> .env
+echo "API_BASE_URL=$API_BASE_URL" >> .env
 touch .env.example
 
 # Get dependencies and build

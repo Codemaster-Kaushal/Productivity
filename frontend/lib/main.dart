@@ -30,10 +30,17 @@ Future<void> main() async {
   }
 
   // 2. Supabase
-  await Supabase.initialize(
-    url: dotenv.env['SUPABASE_URL']!,
-    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
-  );
+  final supabaseUrl = dotenv.env['SUPABASE_URL'] ?? const String.fromEnvironment('SUPABASE_URL', defaultValue: 'https://placeholder.supabase.co');
+  final supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? dotenv.env['SUPABASE_KEY'] ?? const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: 'placeholder-key');
+  
+  try {
+    await Supabase.initialize(
+      url: supabaseUrl,
+      anonKey: supabaseAnonKey,
+    );
+  } catch (e) {
+    debugPrint("Supabase initialization failed: $e");
+  }
 
   // 3. App Setup
   final app = MultiRepositoryProvider(
