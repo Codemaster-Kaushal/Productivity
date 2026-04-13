@@ -1,0 +1,9 @@
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[project]
+name = "productivity-api"
+version = "1.0.0"
+description = "Gamified study app backend"
+requires-python = ">=3.12"
