@@ -49,6 +49,11 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<void> signUp(String email, String password) async {
+    // Email/password sign‑up is deprecated; inform the user.
+    emit(const AuthState.error('Sign‑up via email/password is no longer supported. Please use Google sign‑in.'));
+  }
+
   Future<void> signOut() async {
     await _repository.signOut();
     emit(const AuthState.unauthenticated());
