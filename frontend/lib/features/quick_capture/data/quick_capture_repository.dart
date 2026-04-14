@@ -60,7 +60,7 @@ class QuickCaptureRepository {
     DateTime? dueDate;
 
     if (lower.contains('tomorrow')) {
-      dueDate = DateTime.now().add(const Duration(days: 1));
+      dueDate = DateTime.now().add(Duration(days: 1));
     } else if (lower.contains('today')) {
       dueDate = DateTime.now();
     } else {

@@ -1,301 +1,430 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../cubit/dashboard_cubit.dart';
-import '../cubit/dashboard_state.dart';
+import 'dart:math' as math;
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../core/theme/aurora_theme.dart';
-import 'widgets/momentum_bar.dart';
-import 'widgets/subject_balance_ring.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
-
-  String _greeting() {
-    final hour = DateTime.now().hour;
-    if (hour < 12) return 'MORNING';
-    if (hour < 17) return 'AFTERNOON';
-    return 'EVENING';
-  }
+  DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardCubit, DashboardState>(
-      builder: (context, state) {
-        return state.when(
-          initial: () => const Center(child: CircularProgressIndicator()),
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (msg) => Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.error_outline, color: AppColors.scoreRed, size: 48),
-                const SizedBox(height: 16),
-                Text(msg, style: const TextStyle(color: AppColors.scoreRed)),
-                const SizedBox(height: 16),
-                AuroraTheme.outlinedButton(
-                  text: 'Retry',
-                  onPressed: () => context.read<DashboardCubit>().loadDashboard(),
-                ),
-              ],
-            ),
-          ),
-          loaded: (
-            todayScore,
-            isActiveDay,
-            isStrongDay,
-            currentStreak,
-            focusMinutesToday,
-            last7Scores,
-            completedBig3,
-            totalBig3,
-            pomodoroCount,
-            taskCount,
-            shieldCount,
-            momentumPct,
-            subjectDistribution,
-          ) {
-            return RefreshIndicator(
-              color: AppColors.primary,
-              backgroundColor: AppColors.surfaceBorder,
-              onRefresh: () => context.read<DashboardCubit>().loadDashboard(),
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 100),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // ── Aurora Header ──
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${_greeting()}, SYNCED USER',
-                                style: GoogleFonts.inter(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.primary,
-                                  letterSpacing: 1.5,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'The universe is in focus.',
-                                style: AppTextStyles.h1,
-                              ),
-                            ],
-                          ),
-                        ),
-                        AuroraTheme.statusTag(
-                          momentumPct > 0.7 ? 'Momentum: High' : 'Momentum: Avg',
-                          color: AppColors.textSecondary,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 32),
-
-                    // ── Aurora True Score & Metrics Row ──
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Left Score Card
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            padding: const EdgeInsets.all(24),
-                            decoration: AuroraTheme.cardGradient,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('True Score', style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary)),
-                                Text('Composite productivity index', style: AppTextStyles.caption),
-                                const SizedBox(height: 24),
-                                Center(
-                                  child: Text(
-                                    todayScore.toInt().toString(),
-                                    style: AppTextStyles.scoreHero,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Center(
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Icon(Icons.auto_graph, color: AppColors.primary, size: 14),
-                                      const SizedBox(width: 4),
-                                      Text('+0% FROM YESTERDAY', style: AppTextStyles.label.copyWith(color: AppColors.primary)),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 32),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: AuroraTheme.gradientButton(
-                                        text: 'Deep Work',
-                                        height: 40,
-                                        onPressed: () {}, // Handled by Quick Capture for now or Pomodoro
-                                      ),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: AuroraTheme.outlinedButton(
-                                        text: 'View Insights',
-                                        onPressed: () {},
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        
-                        // Right Side Streak/Shield Cards
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(20),
-                                decoration: AuroraTheme.card,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Icon(Icons.local_fire_department, color: AppColors.primary, size: 18),
-                                        Text('FOCUS STREAK', style: AppTextStyles.label),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 12),
-                                    Text('$currentStreak Days', style: AppTextStyles.h2),
-                                    const SizedBox(height: 12),
-                                    LinearProgressIndicator(
-                                      value: 1.0,
-                                      backgroundColor: AppColors.surfaceBorder,
-                                      color: AppColors.primary,
-                                      minHeight: 4,
-                                      borderRadius: BorderRadius.circular(2),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              Container(
-                                padding: const EdgeInsets.all(20),
-                                decoration: AuroraTheme.cardElevated,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Icon(Icons.shield_outlined, color: AppColors.textSecondary, size: 18),
-                                        Text('DISTRACTION SHIELD', style: AppTextStyles.label),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 12),
-                                    Text(isActiveDay ? 'Active' : 'Inactive', style: AppTextStyles.h2),
-                                    const SizedBox(height: 4),
-                                    Text('$shieldCount blocks prevented today', style: AppTextStyles.caption),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 32),
-
-                    // ── Weekly Momentum Bar ──
-                    AuroraTheme.sectionHeader('Weekly Momentum', trailing: 'MON - SUN'),
-                    const SizedBox(height: 16),
-                    MomentumBar(percentage: momentumPct), // Needs UI update internally later
-                    const SizedBox(height: 32),
-
-                    // ── Aurora Stats Grid ──
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Subject Balance Ring
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            height: 220,
-                            padding: const EdgeInsets.all(16),
-                            decoration: AuroraTheme.card,
-                            child: SubjectBalanceRing(distribution: subjectDistribution),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        
-                        // 2x2 Stats Grid
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(child: _buildAuroraStatCard('timer_outlined', '${(focusMinutesToday / 60.0).toStringAsFixed(1)}h', 'DEEP WORK AVG')),
-                                  const SizedBox(width: 16),
-                                  Expanded(child: _buildAuroraStatCard('check_circle_outline', '$taskCount', 'FLOW TASKS')),
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              Row(
-                                children: [
-                                  Expanded(child: _buildAuroraStatCard('psychology_outlined', '92%', 'MENTAL CLARITY')),
-                                  const SizedBox(width: 16),
-                                  Expanded(child: _buildAuroraStatCard('bolt_outlined', '${todayScore.toInt() * 5}', 'EFFICIENCY PTS')),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
-  Widget _buildAuroraStatCard(String iconStr, String value, String label) {
-    IconData icon = Icons.timer_outlined; // Default fallback
-    if (iconStr == 'check_circle_outline') icon = Icons.check_circle_outline;
-    if (iconStr == 'psychology_outlined') icon = Icons.psychology_outlined;
-    if (iconStr == 'bolt_outlined') icon = Icons.bolt_outlined;
-
-    return Container(
-      height: 102,
-      padding: const EdgeInsets.all(16),
-      decoration: AuroraTheme.card,
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Icon(icon, color: AppColors.textSecondary, size: 16),
-          const Spacer(),
-          Text(value, style: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
-          const SizedBox(height: 2),
-          Text(label, style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w600, color: AppColors.textMuted, letterSpacing: 0.5)),
+          _buildGreetingHeader(),
+          SizedBox(height: 40),
+          
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isDesktop = constraints.maxWidth > 800;
+              
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (isDesktop)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(flex: 8, child: _buildHeroScoreCard()),
+                        SizedBox(width: 24),
+                        Expanded(flex: 4, child: Column(
+                          children: [
+                            _buildStreakCard(),
+                            SizedBox(height: 24),
+                            _buildShieldCard(),
+                          ],
+                        )),
+                      ],
+                    )
+                  else
+                    Column(
+                      children: [
+                        _buildHeroScoreCard(),
+                        SizedBox(height: 24),
+                        _buildStreakCard(),
+                        SizedBox(height: 24),
+                        _buildShieldCard(),
+                      ],
+                    ),
+                  
+                  SizedBox(height: 24),
+                  _buildWeeklyMomentum(),
+                  SizedBox(height: 24),
+
+                  if (isDesktop)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(flex: 5, child: _buildBalanceRing()),
+                        SizedBox(width: 24),
+                        Expanded(flex: 7, child: _buildQuickStatsGrid()),
+                      ],
+                    )
+                  else
+                    Column(
+                      children: [
+                        _buildBalanceRing(),
+                        SizedBox(height: 24),
+                        _buildQuickStatsGrid(),
+                      ],
+                    ),
+                ],
+              );
+            },
+          )
         ],
       ),
     );
   }
+
+  Widget _buildGreetingHeader() {
+    return Wrap(
+      alignment: WrapAlignment.spaceBetween,
+      crossAxisAlignment: WrapCrossAlignment.end,
+      runSpacing: 16,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('MORNING, ALEXANDER', style: AppTextStyles.label.copyWith(
+              color: AppColors.primary, fontSize: 12, letterSpacing: 0.6,
+            )),
+            SizedBox(height: 4),
+            Text('The universe is in focus.', style: AppTextStyles.headline.copyWith(
+              fontSize: 48, fontWeight: FontWeight.w600, letterSpacing: -1.92, color: AppColors.onSurface,
+            )),
+          ],
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: AppColors.surfaceContainerHigh.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(9999),
+            border: Border.all(color: AppColors.outlineVariant.withOpacity(0.15)),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.auto_awesome, color: AppColors.secondary, size: 14),
+              SizedBox(width: 6),
+              Text('Momentum: High', style: AppTextStyles.body.copyWith(fontSize: 14, fontWeight: FontWeight.w500)),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildHeroScoreCard() {
+    return Container(
+      constraints: BoxConstraints(minHeight: 400),
+      decoration: BoxDecoration(color: AppColors.surfaceContainerLow, borderRadius: BorderRadius.circular(24)),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            top: -128,
+            right: -128,
+            child: Container(
+              width: 256,
+              height: 256,
+              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.primary.withOpacity(0.1), boxShadow: [BoxShadow(color: AppColors.primary.withOpacity(0.1), blurRadius: 100, spreadRadius: 50)]),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('True Score', style: AppTextStyles.headline.copyWith(fontSize: 18, fontWeight: FontWeight.w500, color: AppColors.onSurfaceVariant)),
+                    Text('Composite productivity index', style: AppTextStyles.body.copyWith(fontSize: 14, color: AppColors.outlineVariant)),
+                  ],
+                ),
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ShaderMask(
+                          shaderCallback: (bounds) => LinearGradient(colors: [AppColors.primary, AppColors.secondary], begin: Alignment.topLeft, end: Alignment.bottomRight).createShader(bounds),
+                          child: Text(
+                            '84',
+                            style: GoogleFonts.inter(fontSize: 160, fontWeight: FontWeight.w800, color: Colors.white, height: 1.0, letterSpacing: -8),
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.trending_up, color: AppColors.primary, size: 16),
+                            SizedBox(width: 8),
+                            Text('+12% FROM YESTERDAY', style: AppTextStyles.label.copyWith(color: AppColors.primary, fontSize: 14)),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 16,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      decoration: BoxDecoration(gradient: LinearGradient(colors: [AppColors.primary, AppColors.secondary]), borderRadius: BorderRadius.circular(9999)),
+                      child: Text('Deep Work', style: AppTextStyles.body.copyWith(fontWeight: FontWeight.bold, color: AppColors.onPrimaryFixed)),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      decoration: BoxDecoration(color: AppColors.surfaceBright.withOpacity(0.2), border: Border.all(color: AppColors.primary.withOpacity(0.2)), borderRadius: BorderRadius.circular(9999)),
+                      child: Text('View Insights', style: AppTextStyles.body.copyWith(fontWeight: FontWeight.w600, color: AppColors.onSurface)),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStreakCard() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(color: AppColors.surfaceContainerHigh, borderRadius: BorderRadius.circular(24), border: Border.all(color: AppColors.outlineVariant.withOpacity(0.1)), boxShadow: const [BoxShadow(color: Color.fromRGBO(0,0,0,0.2), blurRadius: 32, offset: Offset(0, 8))]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.local_fire_department, color: AppColors.secondary),
+              Text('FOCUS STREAK', style: AppTextStyles.label.copyWith(fontSize: 12, color: AppColors.onSurfaceVariant)),
+            ],
+          ),
+          SizedBox(height: 16),
+          Text('14 Days', style: AppTextStyles.headline.copyWith(fontSize: 36, fontWeight: FontWeight.bold)),
+          SizedBox(height: 16),
+          Container(
+            height: 4,
+            width: double.infinity,
+            decoration: BoxDecoration(color: AppColors.surfaceVariant, borderRadius: BorderRadius.circular(9999)),
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: 0.7,
+              child: Container(decoration: BoxDecoration(color: AppColors.secondary, borderRadius: BorderRadius.circular(9999), boxShadow: const [BoxShadow(color: AppColors.secondary, blurRadius: 8)])),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildShieldCard() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(color: AppColors.surfaceContainerHigh, borderRadius: BorderRadius.circular(24), border: Border.all(color: AppColors.outlineVariant.withOpacity(0.1)), boxShadow: const [BoxShadow(color: Color.fromRGBO(0,0,0,0.2), blurRadius: 32, offset: Offset(0, 8))]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.security, color: AppColors.primary),
+              Text('DISTRACTION SHIELD', style: AppTextStyles.label.copyWith(fontSize: 12, color: AppColors.onSurfaceVariant)),
+            ],
+          ),
+          SizedBox(height: 16),
+          Text('Active', style: AppTextStyles.headline.copyWith(fontSize: 36, fontWeight: FontWeight.bold)),
+          SizedBox(height: 8),
+          Text('34 blocks prevented today', style: AppTextStyles.body.copyWith(fontSize: 14, color: AppColors.onSurfaceVariant)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWeeklyMomentum() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(color: AppColors.surfaceContainerLow, borderRadius: BorderRadius.circular(24)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Weekly Momentum', style: AppTextStyles.headline.copyWith(fontSize: 18, fontWeight: FontWeight.w500)),
+              Text('MON — SUN', style: AppTextStyles.label.copyWith(fontSize: 12, color: AppColors.outlineVariant, letterSpacing: 1.2)),
+            ],
+          ),
+          SizedBox(height: 32),
+          SizedBox(
+            height: 128,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildBarGraphCol('M', 0.6, Color(0xFF767578), 48),
+                _buildBarGraphCol('T', 0.85, AppColors.primary, 96, shadowColor: AppColors.primary),
+                _buildBarGraphCol('W', 0.7, AppColors.primaryDim, 64),
+                _buildBarGraphCol('T', 1.0, AppColors.secondary, 112, shadowColor: AppColors.secondary),
+                _buildBarGraphCol('F', 0.75, AppColors.primary, 80),
+                _buildBarGraphCol('S', 0.4, AppColors.outlineVariant, 32),
+                _buildBarGraphCol('S', 0.5, AppColors.outlineVariant, 40),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBarGraphCol(String day, double fillFactor, Color color, double containerHeight, {Color? shadowColor}) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            height: containerHeight,
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            decoration: BoxDecoration(color: AppColors.surfaceVariant, borderRadius: BorderRadius.circular(9999)),
+            alignment: Alignment.bottomCenter,
+            child: FractionallySizedBox(
+              heightFactor: fillFactor,
+              child: Container(decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(9999), boxShadow: shadowColor != null ? [BoxShadow(color: shadowColor.withOpacity(0.3), blurRadius: 15)] : null), width: double.infinity),
+            ),
+          ),
+          SizedBox(height: 12),
+          Text(day, style: AppTextStyles.label.copyWith(fontSize: 10, color: AppColors.outlineVariant)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBalanceRing() {
+    return Container(
+      constraints: BoxConstraints(minHeight: 280),
+      padding: const EdgeInsets.all(32),
+      decoration: BoxDecoration(color: AppColors.surfaceContainerHigh, borderRadius: BorderRadius.circular(24)),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 128,
+            height: 128,
+            child: Stack(
+              children: [
+                CustomPaint(size: Size(128, 128), painter: _RingPainter()),
+                Center(child: Text('BALANCE', style: AppTextStyles.label.copyWith(fontSize: 12))),
+              ],
+            ),
+          ),
+          SizedBox(width: 32),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Core Focus', style: AppTextStyles.headline.copyWith(fontSize: 18, fontWeight: FontWeight.w500)),
+                SizedBox(height: 16),
+                _buildLegendRow('Strategic Design', '45%', AppColors.primary),
+                SizedBox(height: 8),
+                _buildLegendRow('Deep Research', '30%', AppColors.secondary),
+                SizedBox(height: 8),
+                _buildLegendRow('Others', '25%', AppColors.outlineVariant),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLegendRow(String title, String percent, Color dotColor) {
+    return Row(
+      children: [
+        Container(width: 8, height: 8, decoration: BoxDecoration(shape: BoxShape.circle, color: dotColor)),
+        SizedBox(width: 8),
+        Text(title, style: AppTextStyles.body.copyWith(fontSize: 14, color: AppColors.onSurfaceVariant)),
+        Spacer(),
+        Text(percent, style: AppTextStyles.body.copyWith(fontSize: 14, fontWeight: FontWeight.bold)),
+      ],
+    );
+  }
+
+  Widget _buildQuickStatsGrid() {
+    return LayoutBuilder(builder: (context, constraints) {
+      final crossCount = constraints.maxWidth < 400 ? 1 : 2;
+      return GridView.count(
+        crossAxisCount: crossCount,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        childAspectRatio: 1.4,
+        children: [
+          _buildQuickStatCard('timer', '6.2h', 'Deep Work Avg', AppColors.tertiary),
+          _buildQuickStatCard('task_alt', '182', 'Flow Tasks', AppColors.primary),
+          _buildQuickStatCard('psychology', '92%', 'Mental Clarity', AppColors.secondary),
+          _buildQuickStatCard('bolt', '450', 'Efficiency Pts', AppColors.tertiaryFixed),
+        ],
+      );
+    });
+  }
+
+  Widget _buildQuickStatCard(String iconStr, String val, String title, Color iconColor) {
+    IconData icon;
+    switch(iconStr) {
+      case 'timer': icon = Icons.timer; break;
+      case 'task_alt': icon = Icons.task_alt; break;
+      case 'psychology': icon = Icons.psychology; break;
+      case 'bolt': icon = Icons.bolt; break;
+      default: icon = Icons.help;
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(color: AppColors.surfaceContainerLow, borderRadius: BorderRadius.circular(24), border: Border.all(color: AppColors.outlineVariant.withOpacity(0.1))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: iconColor),
+          SizedBox(height: 12),
+          Text(val, style: AppTextStyles.headline.copyWith(fontSize: 24, fontWeight: FontWeight.bold)),
+          SizedBox(height: 4),
+          Text(title, style: AppTextStyles.label.copyWith(fontSize: 12, color: AppColors.onSurfaceVariant, letterSpacing: 0.6)),
+        ],
+      ),
+    );
+  }
+}
+
+class _RingPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    final paint = Paint()..style = PaintingStyle.stroke..strokeWidth = 4;
+    paint.color = AppColors.surfaceVariant;
+    canvas.drawArc(rect, 0, 2 * math.pi, false, paint);
+    paint.color = AppColors.primary;
+    double start1 = -math.pi / 2;
+    double sweep1 = 2 * math.pi * 0.45;
+    canvas.drawArc(rect, start1, sweep1, false, paint);
+    paint.color = AppColors.secondary;
+    double start2 = start1 + sweep1 + 0.1;
+    double sweep2 = 2 * math.pi * 0.30;
+    canvas.drawArc(rect, start2, sweep2, false, paint);
+  }
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

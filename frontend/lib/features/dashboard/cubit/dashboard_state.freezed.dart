@@ -631,7 +631,7 @@ class _$LoadedImpl implements _Loaded {
                 other.currentStreak == currentStreak) &&
             (identical(other.focusMinutesToday, focusMinutesToday) ||
                 other.focusMinutesToday == focusMinutesToday) &&
-            const DeepCollectionEquality()
+            DeepCollectionEquality()
                 .equals(other._last7Scores, _last7Scores) &&
             (identical(other.completedBig3, completedBig3) ||
                 other.completedBig3 == completedBig3) &&
@@ -645,7 +645,7 @@ class _$LoadedImpl implements _Loaded {
                 other.shieldCount == shieldCount) &&
             (identical(other.momentumPct, momentumPct) ||
                 other.momentumPct == momentumPct) &&
-            const DeepCollectionEquality()
+            DeepCollectionEquality()
                 .equals(other._subjectDistribution, _subjectDistribution));
   }
 
@@ -657,14 +657,14 @@ class _$LoadedImpl implements _Loaded {
       isStrongDay,
       currentStreak,
       focusMinutesToday,
-      const DeepCollectionEquality().hash(_last7Scores),
+      DeepCollectionEquality().hash(_last7Scores),
       completedBig3,
       totalBig3,
       pomodoroCount,
       taskCount,
       shieldCount,
       momentumPct,
-      const DeepCollectionEquality().hash(_subjectDistribution));
+      DeepCollectionEquality().hash(_subjectDistribution));
 
   @JsonKey(ignore: true)
   @override

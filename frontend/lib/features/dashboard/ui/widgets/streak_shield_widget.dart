@@ -6,7 +6,7 @@ class StreakShieldWidget extends StatelessWidget {
   final int shields;
   final bool isActiveToday;
 
-  const StreakShieldWidget({
+  StreakShieldWidget({
     super.key,
     required this.streak,
     required this.shields,
@@ -44,14 +44,14 @@ class StreakShieldWidget extends StatelessWidget {
               children: [
                 Text(
                   streak > 0 ? '🔥' : '❄️',
-                  style: const TextStyle(fontSize: 28),
+                  style: TextStyle(fontSize: 28),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('$streak',
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: AppColors.textPrimary,
                             fontSize: 24,
                             fontWeight: FontWeight.bold)),
@@ -80,14 +80,14 @@ class StreakShieldWidget extends StatelessWidget {
               children: [
                 Text(
                   shields > 0 ? '🛡️' : '🪨',
-                  style: const TextStyle(fontSize: 28),
+                  style: TextStyle(fontSize: 28),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('$shields',
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: AppColors.textPrimary,
                             fontSize: 24,
                             fontWeight: FontWeight.bold)),
@@ -110,7 +110,7 @@ class StreakShieldWidget extends StatelessWidget {
                 color: AppColors.scoreRed.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 '⚠️',
                 style: TextStyle(fontSize: 16),
               ),

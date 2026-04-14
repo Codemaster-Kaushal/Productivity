@@ -3,11 +3,11 @@ class AudioTrack {
   final String icon;
   final String url;
 
-  const AudioTrack({required this.name, required this.icon, required this.url});
+  AudioTrack({required this.name, required this.icon, required this.url});
 }
 
 // Free ambient sound URLs (CC0 licensed from freesound/pixabay)
-const audioTracks = [
+final audioTracks = [
   AudioTrack(
     name: 'Rain',
     icon: '🌧️',

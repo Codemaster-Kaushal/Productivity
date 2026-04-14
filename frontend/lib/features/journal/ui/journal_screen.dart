@@ -6,7 +6,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 
 class JournalScreen extends StatefulWidget {
-  const JournalScreen({super.key});
+  JournalScreen({super.key});
 
   @override
   State<JournalScreen> createState() => _JournalScreenState();
@@ -47,7 +47,7 @@ class _JournalScreenState extends State<JournalScreen> {
                   _showForm = false;
                 });
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                  SnackBar(
                     content: Text('Journal entry saved!'),
                     backgroundColor: AppColors.scoreGreen,
                   ),
@@ -76,7 +76,7 @@ class _JournalScreenState extends State<JournalScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('How are you feeling today?', style: AppTextStyles.h2),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -95,7 +95,7 @@ class _JournalScreenState extends State<JournalScreen> {
                             Text('😊', style: TextStyle(fontSize: 24)),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         TextField(
                           controller: _contentController,
                           maxLines: 5,
@@ -109,11 +109,11 @@ class _JournalScreenState extends State<JournalScreen> {
                               borderSide: BorderSide.none,
                             ),
                           ),
-                          style: const TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColors.textPrimary),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: 16),
                         state.maybeWhen(
-                          loading: () => const Center(child: CircularProgressIndicator()),
+                          loading: () => Center(child: CircularProgressIndicator()),
                           orElse: () => SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
@@ -134,18 +134,18 @@ class _JournalScreenState extends State<JournalScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24),
                 ],
 
                 // Past entries
                 Text('Past Entries', style: AppTextStyles.h2),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 state.when(
-                  initial: () => const Center(child: CircularProgressIndicator()),
+                  initial: () => Center(child: CircularProgressIndicator()),
                   loading: () => _showForm
                       ? const SizedBox.shrink()
-                      : const Center(child: CircularProgressIndicator()),
-                  error: (msg) => Center(child: Text(msg, style: const TextStyle(color: AppColors.scoreRed))),
+                      : Center(child: CircularProgressIndicator()),
+                  error: (msg) => Center(child: Text(msg, style: TextStyle(color: AppColors.scoreRed))),
                   loaded: (entries) {
                     if (entries.isEmpty) {
                       return Center(
@@ -154,9 +154,9 @@ class _JournalScreenState extends State<JournalScreen> {
                           child: Column(
                             children: [
                               Icon(Icons.book_outlined, size: 64, color: Colors.grey.shade600),
-                              const SizedBox(height: 16),
+                              SizedBox(height: 16),
                               Text('No journal entries yet', style: AppTextStyles.bodySecondary),
-                              const SizedBox(height: 8),
+                              SizedBox(height: 8),
                               Text('Tap the ✏️ button to write your first entry!', style: AppTextStyles.bodySecondary),
                             ],
                           ),
@@ -188,7 +188,7 @@ class _JournalScreenState extends State<JournalScreen> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 10),
+                              SizedBox(height: 10),
                               Text(
                                 entry.content,
                                 style: AppTextStyles.body,

@@ -4,7 +4,7 @@ import '../../../../core/constants/app_colors.dart';
 class DeadlineCards extends StatelessWidget {
   final List<Map<String, dynamic>> deadlines;
 
-  const DeadlineCards({super.key, required this.deadlines});
+  DeadlineCards({super.key, required this.deadlines});
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,13 @@ class DeadlineCards extends StatelessWidget {
                 color: Colors.grey.shade400,
                 fontSize: 13,
                 fontWeight: FontWeight.w500)),
-        const SizedBox(height: 10),
+        SizedBox(height: 10),
         SizedBox(
           height: 100,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: deadlines.length,
-            separatorBuilder: (_, _) => const SizedBox(width: 10),
+            separatorBuilder: (_, _) => SizedBox(width: 10),
             itemBuilder: (context, index) {
               final d = deadlines[index];
               final title = d['title'] ?? 'Untitled';
@@ -71,7 +71,7 @@ class DeadlineCards extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(title,
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: AppColors.textPrimary,
                             fontSize: 13,
                             fontWeight: FontWeight.w600),
@@ -80,7 +80,7 @@ class DeadlineCards extends StatelessWidget {
                     Row(
                       children: [
                         Icon(Icons.schedule, size: 14, color: urgencyColor),
-                        const SizedBox(width: 4),
+                        SizedBox(width: 4),
                         Text(urgencyText,
                             style: TextStyle(
                                 color: urgencyColor,

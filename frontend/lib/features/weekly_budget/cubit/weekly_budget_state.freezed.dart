@@ -369,12 +369,12 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(other._budgets, _budgets));
+            DeepCollectionEquality().equals(other._budgets, _budgets));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_budgets));
+      Object.hash(runtimeType, DeepCollectionEquality().hash(_budgets));
 
   @JsonKey(ignore: true)
   @override

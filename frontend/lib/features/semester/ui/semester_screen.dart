@@ -6,7 +6,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 
 class SemesterScreen extends StatelessWidget {
-  const SemesterScreen({super.key});
+  SemesterScreen({super.key});
 
   void _showCreateGoalDialog(BuildContext context) {
     final subjectController = TextEditingController();
@@ -24,9 +24,9 @@ class SemesterScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _buildField(subjectController, 'Subject (e.g., Mathematics)'),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               _buildField(titleController, 'Goal title (e.g., Score 90+ in finals)'),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               _buildField(semesterController, 'Semester label'),
             ],
           ),
@@ -40,7 +40,7 @@ class SemesterScreen extends StatelessWidget {
             onPressed: () {
               if (subjectController.text.isNotEmpty && titleController.text.isNotEmpty) {
                 final now = DateTime.now();
-                final endDate = now.add(const Duration(days: 120));
+                final endDate = now.add(Duration(days: 120));
                 context.read<SemesterCubit>().createGoal(
                   subject: subjectController.text.trim(),
                   title: titleController.text.trim(),
@@ -75,7 +75,7 @@ class SemesterScreen extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
       ),
-      style: const TextStyle(color: AppColors.textPrimary),
+      style: TextStyle(color: AppColors.textPrimary),
     );
   }
 
@@ -90,21 +90,21 @@ class SemesterScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showCreateGoalDialog(context),
         backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
       body: BlocBuilder<SemesterCubit, SemesterState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Center(child: CircularProgressIndicator()),
+            initial: () => Center(child: CircularProgressIndicator()),
+            loading: () => Center(child: CircularProgressIndicator()),
             error: (msg) => Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.error_outline, color: AppColors.scoreRed, size: 48),
-                  const SizedBox(height: 16),
-                  Text(msg, style: const TextStyle(color: AppColors.scoreRed)),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
+                  Text(msg, style: TextStyle(color: AppColors.scoreRed)),
+                  SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => context.read<SemesterCubit>().loadGoals(),
                     child: Text('Retry'),
@@ -119,9 +119,9 @@ class SemesterScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.school_outlined, size: 64, color: Colors.grey.shade600),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Text('No semester goals yet', style: AppTextStyles.bodySecondary),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text('Tap + to add your first semester goal!', style: AppTextStyles.bodySecondary),
                     ],
                   ),
@@ -144,7 +144,7 @@ class SemesterScreen extends StatelessWidget {
                           color: AppColors.scoreRed.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: const Icon(Icons.delete, color: AppColors.scoreRed),
+                        child: Icon(Icons.delete, color: AppColors.scoreRed),
                       ),
                       onDismissed: (_) => context.read<SemesterCubit>().deleteGoal(g.id),
                       child: Card(
@@ -166,7 +166,7 @@ class SemesterScreen extends StatelessWidget {
                                     ),
                                     child: Text(g.subject, style: TextStyle(color: AppColors.primary, fontSize: 12, fontWeight: FontWeight.w600)),
                                   ),
-                                  const Spacer(),
+                                  Spacer(),
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                                     decoration: BoxDecoration(
@@ -180,9 +180,9 @@ class SemesterScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 10),
+                              SizedBox(height: 10),
                               Text(g.title, style: AppTextStyles.body),
-                              const SizedBox(height: 6),
+                              SizedBox(height: 6),
                               Text(
                                 '${g.semesterLabel}  •  ${g.startDate} → ${g.endDate}',
                                 style: AppTextStyles.bodySecondary.copyWith(fontSize: 12),

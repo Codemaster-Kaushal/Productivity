@@ -18,7 +18,7 @@ class QuickCaptureCubit extends Cubit<QuickCaptureState> {
       emit(QuickCaptureState.saved(parsed.title, parsed.type));
       
       // Auto-reset after 2 seconds
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 2));
       if (!isClosed) emit(const QuickCaptureState.idle());
     } catch (e, stack) {
       Sentry.captureException(e, stackTrace: stack);

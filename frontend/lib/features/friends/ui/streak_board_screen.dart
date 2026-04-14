@@ -9,7 +9,7 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/theme/aurora_theme.dart';
 
 class StreakBoardScreen extends StatelessWidget {
-  const StreakBoardScreen({super.key});
+  StreakBoardScreen({super.key});
 
   void _showAddFriendDialog(BuildContext context) {
     final codeController = TextEditingController();
@@ -24,7 +24,7 @@ class StreakBoardScreen extends StatelessWidget {
           controller: codeController,
           textCapitalization: TextCapitalization.characters,
           maxLength: 6,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             hintText: 'Enter 6-letter frequency code',
           ),
           style: AppTextStyles.body.copyWith(letterSpacing: 2),
@@ -56,9 +56,9 @@ class StreakBoardScreen extends StatelessWidget {
       body: BlocBuilder<FriendsCubit, FriendsState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (msg) => Center(child: Text(msg, style: const TextStyle(color: AppColors.scoreRed))),
+            initial: () => Center(child: CircularProgressIndicator()),
+            loading: () => Center(child: CircularProgressIndicator()),
+            error: (msg) => Center(child: Text(msg, style: TextStyle(color: AppColors.scoreRed))),
             loaded: (friends, myCode) {
               return SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(20, 50, 20, 100),
@@ -66,7 +66,7 @@ class StreakBoardScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     AuroraTheme.sectionHeader('Celestial Universe'),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
                     
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,7 +75,7 @@ class StreakBoardScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Global Network', style: AppTextStyles.h1),
-                            const SizedBox(height: 8),
+                            SizedBox(height: 8),
                             Text('Your position within the synced collective.', style: AppTextStyles.bodySecondary),
                           ],
                         ),
@@ -85,7 +85,7 @@ class StreakBoardScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
 
                     LayoutBuilder(
                       builder: (context, constraints) {
@@ -98,7 +98,7 @@ class StreakBoardScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(flex: 2, child: streaks),
-                              const SizedBox(width: 32),
+                              SizedBox(width: 32),
                               Expanded(flex: 1, child: connectionCode),
                             ],
                           );
@@ -107,7 +107,7 @@ class StreakBoardScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               connectionCode,
-                              const SizedBox(height: 32),
+                              SizedBox(height: 32),
                               streaks,
                             ],
                           );
@@ -135,12 +135,12 @@ class StreakBoardScreen extends StatelessWidget {
             Text('TOP 10', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
           ],
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Container(
           decoration: AuroraTheme.card,
           child: ListView.separated(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             itemCount: friends.isEmpty ? 1 : friends.length,
             separatorBuilder: (_, _) => Divider(color: AppColors.surfaceBorder, height: 1),
             itemBuilder: (context, index) {
@@ -163,13 +163,13 @@ class StreakBoardScreen extends StatelessWidget {
                       width: 24,
                       child: Text('0${index + 1}', style: AppTextStyles.label.copyWith(color: isTop ? AppColors.primary : AppColors.textSecondary)),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     CircleAvatar(
                       backgroundColor: isTop ? AppColors.primary.withOpacity(0.2) : AppColors.surfaceBorder,
                       child: Text(f.displayName.substring(0, 1).toUpperCase(), 
                         style: TextStyle(color: isTop ? AppColors.primary : AppColors.textPrimary)),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,8 +181,8 @@ class StreakBoardScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Icon(Icons.local_fire_department, color: AppColors.primary, size: 16),
-                        const SizedBox(width: 4),
+                        Icon(Icons.local_fire_department, color: AppColors.primary, size: 16),
+                        SizedBox(width: 4),
                         Text('${f.streak}', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w700, color: AppColors.textPrimary)),
                       ],
                     )
@@ -205,20 +205,20 @@ class StreakBoardScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.hub_outlined, color: AppColors.primary),
-              const SizedBox(width: 8),
+              Icon(Icons.hub_outlined, color: AppColors.primary),
+              SizedBox(width: 8),
               Text('Identity Node', style: AppTextStyles.h3),
             ],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Text('YOUR FREQUENCY CODE', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           GestureDetector(
             onTap: () {
               if (myCode != null) {
                 Clipboard.setData(ClipboardData(text: myCode));
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Frequency code copied.'), backgroundColor: AppColors.primary)
+                  SnackBar(content: Text('Frequency code copied.'), backgroundColor: AppColors.primary)
                 );
               }
             },
@@ -243,16 +243,16 @@ class StreakBoardScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text('Share this code with other nodes to sync your progress within the collective.', style: AppTextStyles.caption.copyWith(color: AppColors.textMuted)),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
 
           Text('CURRENT STATUS', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             children: [
               AuroraTheme.statusTag('ONLINE', color: AppColors.scoreGreen),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               AuroraTheme.statusTag('HIGH ALIGNMENT', color: AppColors.primaryLight),
             ],
           )

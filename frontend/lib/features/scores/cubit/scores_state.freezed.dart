@@ -392,12 +392,12 @@ class _$LoadedImpl implements _Loaded {
             other is _$LoadedImpl &&
             (identical(other.todayScore, todayScore) ||
                 other.todayScore == todayScore) &&
-            const DeepCollectionEquality().equals(other._history, _history));
+            DeepCollectionEquality().equals(other._history, _history));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, todayScore, const DeepCollectionEquality().hash(_history));
+      runtimeType, todayScore, DeepCollectionEquality().hash(_history));
 
   @JsonKey(ignore: true)
   @override

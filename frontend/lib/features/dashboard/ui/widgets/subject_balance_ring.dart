@@ -5,7 +5,7 @@ import '../../../../core/constants/app_colors.dart';
 class SubjectBalanceRing extends StatelessWidget {
   final Map<String, int> distribution;
 
-  const SubjectBalanceRing({super.key, required this.distribution});
+  SubjectBalanceRing({super.key, required this.distribution});
 
   static const _subjectColors = [
     Color(0xFF6C63FF),
@@ -40,7 +40,7 @@ class SubjectBalanceRing extends StatelessWidget {
                   color: Colors.grey.shade400,
                   fontSize: 13,
                   fontWeight: FontWeight.w500)),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             children: [
               // Donut chart
@@ -51,7 +51,7 @@ class SubjectBalanceRing extends StatelessWidget {
                   painter: _DonutPainter(subjects, total),
                 ),
               ),
-              const SizedBox(width: 16),
+              SizedBox(width: 16),
               // Legend
               Expanded(
                 child: Column(
@@ -73,7 +73,7 @@ class SubjectBalanceRing extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(3),
                               ),
                             ),
-                            const SizedBox(width: 6),
+                            SizedBox(width: 6),
                             Expanded(
                               child: Text(entry.key,
                                   style: TextStyle(

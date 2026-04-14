@@ -9,7 +9,7 @@ import '../../../core/theme/aurora_theme.dart';
 import '../../audio/ui/audio_player_widget.dart';
 
 class PomodoroScreen extends StatelessWidget {
-  const PomodoroScreen({super.key});
+  PomodoroScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class PomodoroScreen extends StatelessWidget {
           children: [
             // Header
             AuroraTheme.sectionHeader('Aurora Focus Timer'),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
 
             LayoutBuilder(
               builder: (context, constraints) {
@@ -31,8 +31,8 @@ class PomodoroScreen extends StatelessWidget {
                 final timerSection = _buildTimerSection(context);
                 final rightPanel = Column(
                   children: [
-                    const AudioPlayerWidget(),
-                    const SizedBox(height: 24),
+                    AudioPlayerWidget(),
+                    SizedBox(height: 24),
                     _buildConsistencyCard(),
                   ],
                 );
@@ -42,7 +42,7 @@ class PomodoroScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(flex: 3, child: timerSection),
-                      const SizedBox(width: 32),
+                      SizedBox(width: 32),
                       Expanded(flex: 2, child: rightPanel),
                     ],
                   );
@@ -50,7 +50,7 @@ class PomodoroScreen extends StatelessWidget {
                   return Column(
                     children: [
                       timerSection,
-                      const SizedBox(height: 48),
+                      SizedBox(height: 48),
                       rightPanel,
                     ],
                   );
@@ -76,18 +76,18 @@ class PomodoroScreen extends StatelessWidget {
             completed: (session) => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 20),
-                const Icon(Icons.check_circle_outline, color: AppColors.primary, size: 80),
-                const SizedBox(height: 24),
+                SizedBox(height: 20),
+                Icon(Icons.check_circle_outline, color: AppColors.primary, size: 80),
+                SizedBox(height: 24),
                 Text('Session Completed', style: AppTextStyles.h2),
-                const SizedBox(height: 40),
+                SizedBox(height: 40),
                 AuroraTheme.gradientButton(
                   text: 'Start Another',
                   onPressed: () => context.read<PomodoroCubit>().cancelTimer(),
                 ),
               ],
             ),
-            error: (msg) => Text(msg, style: const TextStyle(color: AppColors.scoreRed)),
+            error: (msg) => Text(msg, style: TextStyle(color: AppColors.scoreRed)),
           );
         },
       ),
@@ -121,27 +121,27 @@ class PomodoroScreen extends StatelessWidget {
                   '25:00',
                   style: GoogleFonts.inter(fontSize: 64, fontWeight: FontWeight.w800, color: Colors.white, height: 1.0),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.all(12),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white24,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 32),
+                  child: Icon(Icons.play_arrow_rounded, color: Colors.white, size: 32),
                 )
               ],
             ),
           ),
         ),
-        const SizedBox(height: 48),
+        SizedBox(height: 48),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _durationChip(context, 25, true),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             _durationChip(context, 45, false),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             _durationChip(context, 60, false),
           ],
         )
@@ -199,7 +199,7 @@ class PomodoroScreen extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 48),
+        SizedBox(height: 48),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -207,7 +207,7 @@ class PomodoroScreen extends StatelessWidget {
               _controlBtn(Icons.pause, () => context.read<PomodoroCubit>().pauseTimer())
             else
               _controlBtn(Icons.play_arrow, () => context.read<PomodoroCubit>().resumeTimer()),
-            const SizedBox(width: 24),
+            SizedBox(width: 24),
             _controlBtn(Icons.stop, () => context.read<PomodoroCubit>().cancelTimer(), isSecondary: true),
           ],
         ),
@@ -237,19 +237,19 @@ class PomodoroScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Current Streak', style: AppTextStyles.h3),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text('12', style: AppTextStyles.scoreLarge),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Padding(
                 padding: const EdgeInsets.only(bottom: 6),
                 child: Text('Focus Hours this week', style: AppTextStyles.caption),
               ),
             ],
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           // Placeholder for the bar chart
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

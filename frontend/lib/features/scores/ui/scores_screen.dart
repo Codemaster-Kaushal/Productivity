@@ -6,7 +6,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 
 class ScoresScreen extends StatelessWidget {
-  const ScoresScreen({super.key});
+  ScoresScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,9 @@ class ScoresScreen extends StatelessWidget {
       body: BlocBuilder<ScoresCubit, ScoresState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (msg) => Center(child: Text(msg, style: const TextStyle(color: AppColors.scoreRed))),
+            initial: () => Center(child: CircularProgressIndicator()),
+            loading: () => Center(child: CircularProgressIndicator()),
+            error: (msg) => Center(child: Text(msg, style: TextStyle(color: AppColors.scoreRed))),
             loaded: (todayScore, history) {
               if (history.isEmpty) return Center(child: Text('No scores yet.', style: AppTextStyles.bodySecondary));
               return ListView.builder(

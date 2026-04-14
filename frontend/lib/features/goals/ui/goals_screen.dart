@@ -9,7 +9,7 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/theme/aurora_theme.dart';
 
 class GoalsScreen extends StatefulWidget {
-  const GoalsScreen({super.key});
+  GoalsScreen({super.key});
 
   @override
   State<GoalsScreen> createState() => _GoalsScreenState();
@@ -58,9 +58,9 @@ class _GoalsScreenState extends State<GoalsScreen> {
       body: BlocBuilder<GoalsCubit, GoalsState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (msg) => Center(child: Text(msg, style: const TextStyle(color: AppColors.scoreRed))),
+            initial: () => Center(child: CircularProgressIndicator()),
+            loading: () => Center(child: CircularProgressIndicator()),
+            error: (msg) => Center(child: Text(msg, style: TextStyle(color: AppColors.scoreRed))),
             loaded: (goals) {
               return SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(20, 50, 20, 100),
@@ -68,12 +68,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     AuroraTheme.sectionHeader('Celestial Productivity'),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
                     
                     Text('Celestial Focus', style: AppTextStyles.h1),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     Text('Architect your reality. Define your three pillars of manifestation for\nthe current cycle.', style: AppTextStyles.bodySecondary),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32),
 
                     LayoutBuilder(
                       builder: (context, constraints) {
@@ -86,7 +86,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(flex: 3, child: taskList),
-                              const SizedBox(width: 32),
+                              SizedBox(width: 32),
                               Expanded(flex: 2, child: inspector),
                             ],
                           );
@@ -95,7 +95,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               inspector,
-                              const SizedBox(height: 32),
+                              SizedBox(height: 32),
                               taskList,
                             ],
                           );
@@ -123,7 +123,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
             Text('PRIORITY MATRIX', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
           ],
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         if (goals.isEmpty)
           Container(
             padding: const EdgeInsets.all(32),
@@ -160,10 +160,10 @@ class _GoalsScreenState extends State<GoalsScreen> {
                           border: Border.all(color: goal.isCompleted ? AppColors.primary : AppColors.surfaceBorder, width: 2),
                           color: goal.isCompleted ? AppColors.primary : Colors.transparent,
                         ),
-                        child: goal.isCompleted ? const Icon(Icons.check, size: 16, color: Colors.white) : null,
+                        child: goal.isCompleted ? Icon(Icons.check, size: 16, color: Colors.white) : null,
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,22 +175,22 @@ class _GoalsScreenState extends State<GoalsScreen> {
                               AuroraTheme.statusTag(goal.isCompleted ? 'COMPLETED' : 'HIGH ORBIT'),
                             ],
                           ),
-                          const SizedBox(height: 8),
+                          SizedBox(height: 8),
                           Text('Subject Context: ${goal.subject}', style: AppTextStyles.bodySecondary),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           Row(
                             children: [
                               Icon(Icons.calendar_today, size: 14, color: AppColors.textMuted),
-                              const SizedBox(width: 4),
+                              SizedBox(width: 4),
                               Text('Today', style: AppTextStyles.caption),
                             ],
                           )
                         ],
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(width: 16),
                     IconButton(
-                      icon: const Icon(Icons.delete_outline, color: AppColors.textMuted),
+                      icon: Icon(Icons.delete_outline, color: AppColors.textMuted),
                       onPressed: () => context.read<GoalsCubit>().deleteGoal(goal.id),
                     )
                   ],
@@ -213,24 +213,24 @@ class _GoalsScreenState extends State<GoalsScreen> {
         children: [
           Row(
             children: [
-              const Icon(Icons.blur_on, color: AppColors.primary),
-              const SizedBox(width: 8),
+              Icon(Icons.blur_on, color: AppColors.primary),
+              SizedBox(width: 8),
               Text('Goal Inspector', style: AppTextStyles.h3),
-              const Spacer(),
+              Spacer(),
               if (_selectedGoal != null)
-                IconButton(icon: const Icon(Icons.close, size: 20), onPressed: _clearSelection),
+                IconButton(icon: Icon(Icons.close, size: 20), onPressed: _clearSelection),
             ],
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           
           Text('OBJECTIVE TITLE', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           TextField(
             controller: _titleController,
             style: AppTextStyles.body,
-            decoration: const InputDecoration(hintText: 'e.g. Launch the Solaris portal'),
+            decoration: InputDecoration(hintText: 'e.g. Launch the Solaris portal'),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           
           Row(
             children: [
@@ -239,18 +239,18 @@ class _GoalsScreenState extends State<GoalsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('ORBIT LEVEL', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                      TextField(
                       controller: _subjectController,
                       style: AppTextStyles.body,
-                      decoration: const InputDecoration(hintText: 'Subject / Area'),
+                      decoration: InputDecoration(hintText: 'Subject / Area'),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
 
           SizedBox(
             width: double.infinity,
@@ -259,7 +259,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
               onPressed: _saveGoal,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           if (_selectedGoal != null)
             Center(
               child: TextButton(
@@ -272,7 +272,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
             ),
             
           if (_selectedGoal == null) ...[
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -285,12 +285,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.psychology_outlined, color: AppColors.primary, size: 16),
-                      const SizedBox(width: 8),
+                      Icon(Icons.psychology_outlined, color: AppColors.primary, size: 16),
+                      SizedBox(width: 8),
                       Text('AI INSIGHT', style: AppTextStyles.label.copyWith(color: AppColors.primary)),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     'Setting precise objectives increases completion probability by 42%. Use the inspector to define your mission parameters.',
                     style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),

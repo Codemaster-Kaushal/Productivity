@@ -52,7 +52,7 @@ class AuroraTheme {
           children: [
             if (icon != null) ...[
               Icon(icon, color: Colors.white, size: 18),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
             ],
             Text(text,
                 style: GoogleFonts.inter(
@@ -115,7 +115,7 @@ class AuroraTheme {
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: AppColors.textPrimary)),
-        const Spacer(),
+        Spacer(),
         if (trailing != null)
           Text(trailing,
               style: GoogleFonts.inter(
@@ -140,7 +140,7 @@ class AuroraTheme {
             fontWeight: FontWeight.w600,
             color: AppColors.textPrimary,
           ),
-          iconTheme: const IconThemeData(color: AppColors.textPrimary),
+          iconTheme: IconThemeData(color: AppColors.textPrimary),
         ),
         cardColor: AppColors.surface,
         dividerColor: AppColors.surfaceBorder,

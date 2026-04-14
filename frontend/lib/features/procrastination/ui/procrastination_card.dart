@@ -4,7 +4,7 @@ import '../../../../core/constants/app_colors.dart';
 class ProcrastinationCard extends StatelessWidget {
   final Map<String, double> avgDelays; // subject -> avg minutes
 
-  const ProcrastinationCard({super.key, required this.avgDelays});
+  ProcrastinationCard({super.key, required this.avgDelays});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class ProcrastinationCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('⏰', style: TextStyle(fontSize: 18)),
-              const SizedBox(width: 8),
+              Text('⏰', style: TextStyle(fontSize: 18)),
+              SizedBox(width: 8),
               Text('Procrastination Patterns',
                   style: TextStyle(
                       color: Colors.grey.shade400,
@@ -34,7 +34,7 @@ class ProcrastinationCard extends StatelessWidget {
                       fontWeight: FontWeight.w500)),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           ...sorted.take(5).map((entry) {
             final minutes = entry.value;
             final hours = (minutes / 60).floor();
@@ -56,7 +56,7 @@ class ProcrastinationCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(entry.key,
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: AppColors.textPrimary, fontSize: 13)),
                   ),
                   Container(

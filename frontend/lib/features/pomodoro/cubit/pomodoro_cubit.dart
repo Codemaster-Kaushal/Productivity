@@ -15,7 +15,7 @@ class PomodoroCubit extends Cubit<PomodoroState> {
   void startTimer(int minutes) {
     emit(PomodoroState.running(secondsRemaining: minutes * 60, totalSeconds: minutes * 60));
     _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       state.maybeWhen(
         running: (secondsRemaining, total) {
           if (secondsRemaining > 1) {
@@ -44,7 +44,7 @@ class PomodoroCubit extends Cubit<PomodoroState> {
     state.maybeWhen(
       paused: (remaining, total) {
         emit(PomodoroState.running(secondsRemaining: remaining, totalSeconds: total));
-        _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        _timer = Timer.periodic(Duration(seconds: 1), (timer) {
           state.maybeWhen(
             running: (secondsRemaining, t) {
               if (secondsRemaining > 1) {
@@ -70,7 +70,7 @@ class PomodoroCubit extends Cubit<PomodoroState> {
   Future<void> _completeSession(int minutesLoaded) async {
     final userId = Supabase.instance.client.auth.currentUser?.id ?? '';
     final session = PomodoroSession(
-      id: const Uuid().v4(),
+      id: Uuid().v4(),
       userId: userId,
       goalId: 'general',
       durationMinutes: minutesLoaded,

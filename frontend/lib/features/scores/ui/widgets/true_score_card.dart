@@ -9,7 +9,7 @@ class TrueScoreCard extends StatefulWidget {
   final bool isActiveDay;
   final bool isStrongDay;
 
-  const TrueScoreCard({
+  TrueScoreCard({
     super.key,
     required this.score,
     required this.isActiveDay,
@@ -31,7 +31,7 @@ class _TrueScoreCardState extends State<TrueScoreCard> with SingleTickerProvider
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: (ScoringConstants.trueScoreAnimationDuration * 1000) ~/ 1),
+      duration: Duration(milliseconds: (ScoringConstants.trueScoreAnimationDuration * 1000) ~/ 1),
     );
     
     _animation = Tween<double>(begin: 0, end: widget.score).animate(
@@ -39,7 +39,7 @@ class _TrueScoreCardState extends State<TrueScoreCard> with SingleTickerProvider
     );
 
     _controller.forward().then((_) {
-      _verdictTimer = Timer(const Duration(milliseconds: (ScoringConstants.verdictDelay * 1000) ~/ 1), () {
+      _verdictTimer = Timer(Duration(milliseconds: (ScoringConstants.verdictDelay * 1000) ~/ 1), () {
         if (mounted) {
           setState(() {
             _showVerdict = true;
@@ -59,7 +59,7 @@ class _TrueScoreCardState extends State<TrueScoreCard> with SingleTickerProvider
         CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic)
       );
       _controller.forward(from: 0).then((_) {
-        _verdictTimer = Timer(const Duration(milliseconds: (ScoringConstants.verdictDelay * 1000) ~/ 1), () {
+        _verdictTimer = Timer(Duration(milliseconds: (ScoringConstants.verdictDelay * 1000) ~/ 1), () {
           if (mounted) {
             setState(() {
               _showVerdict = true;
@@ -104,7 +104,7 @@ class _TrueScoreCardState extends State<TrueScoreCard> with SingleTickerProvider
         child: Column(
           children: [
             Text('True Score', style: AppTextStyles.h2),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             AnimatedBuilder(
               animation: _animation,
               builder: (context, child) {
@@ -116,10 +116,10 @@ class _TrueScoreCardState extends State<TrueScoreCard> with SingleTickerProvider
                 );
               },
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             AnimatedOpacity(
               opacity: _showVerdict ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 300),
+              duration: Duration(milliseconds: 300),
               child: Text(
                 _getVerdictText(widget.score),
                 style: AppTextStyles.body.copyWith(
@@ -128,17 +128,17 @@ class _TrueScoreCardState extends State<TrueScoreCard> with SingleTickerProvider
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 if (widget.isStrongDay)
-                  const Chip(
+                  Chip(
                     label: Text('Strong day ✓', style: TextStyle(color: Colors.white)),
                     backgroundColor: AppColors.primary,
                   )
                 else if (widget.isActiveDay)
-                  const Chip(
+                  Chip(
                     label: Text('Active day ✓', style: TextStyle(color: Colors.white)),
                     backgroundColor: AppColors.scoreTeal,
                   ),

@@ -6,7 +6,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 
 class WeeklyBudgetScreen extends StatelessWidget {
-  const WeeklyBudgetScreen({super.key});
+  WeeklyBudgetScreen({super.key});
 
   void _showAddTargetDialog(BuildContext context) {
     final subjectController = TextEditingController();
@@ -35,29 +35,29 @@ class WeeklyBudgetScreen extends StatelessWidget {
                     borderSide: BorderSide.none,
                   ),
                 ),
-                style: const TextStyle(color: AppColors.textPrimary),
+                style: TextStyle(color: AppColors.textPrimary),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Row(
                 children: [
                   Text('Sessions/week: ',
                       style: TextStyle(color: Colors.grey.shade400)),
-                  const Spacer(),
+                  Spacer(),
                   IconButton(
                     onPressed: () {
                       if (sessions > 1) setState(() => sessions--);
                     },
-                    icon: const Icon(Icons.remove_circle_outline,
+                    icon: Icon(Icons.remove_circle_outline,
                         color: AppColors.textSecondary),
                   ),
                   Text('$sessions',
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: AppColors.textPrimary,
                           fontSize: 20,
                           fontWeight: FontWeight.bold)),
                   IconButton(
                     onPressed: () => setState(() => sessions++),
-                    icon: const Icon(Icons.add_circle_outline,
+                    icon: Icon(Icons.add_circle_outline,
                         color: AppColors.primary),
                   ),
                 ],
@@ -104,16 +104,16 @@ class WeeklyBudgetScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddTargetDialog(context),
         backgroundColor: AppColors.primary,
-        child: const Icon(Icons.add),
+        child: Icon(Icons.add),
       ),
       body: BlocBuilder<WeeklyBudgetCubit, WeeklyBudgetState>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Center(child: CircularProgressIndicator()),
+            initial: () => Center(child: CircularProgressIndicator()),
+            loading: () => Center(child: CircularProgressIndicator()),
             error: (msg) => Center(
                 child: Text(msg,
-                    style: const TextStyle(color: AppColors.scoreRed))),
+                    style: TextStyle(color: AppColors.scoreRed))),
             loaded: (budgets) {
               if (budgets.isEmpty) {
                 return Center(
@@ -122,10 +122,10 @@ class WeeklyBudgetScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.calendar_view_week,
                           size: 64, color: Colors.grey.shade600),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16),
                       Text('No weekly targets set',
                           style: AppTextStyles.bodySecondary),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text('Tap + to plan your study week!',
                           style: AppTextStyles.bodySecondary),
                     ],
@@ -174,7 +174,7 @@ class WeeklyBudgetScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(4),
                             child: LinearProgressIndicator(
@@ -185,7 +185,7 @@ class WeeklyBudgetScreen extends StatelessWidget {
                                   AlwaysStoppedAnimation<Color>(color),
                             ),
                           ),
-                          const SizedBox(height: 6),
+                          SizedBox(height: 6),
                           Text(
                             pct >= 100
                                 ? '✅ Target reached!'

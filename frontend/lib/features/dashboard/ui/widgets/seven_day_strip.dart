@@ -4,7 +4,7 @@ import '../../../../core/constants/app_colors.dart';
 class SevenDayStrip extends StatelessWidget {
   final List<double> scores;
 
-  const SevenDayStrip({super.key, required this.scores});
+  SevenDayStrip({super.key, required this.scores});
 
   Color _tileColor(double score) {
     if (score < 0) return Colors.grey.shade800; // no data
@@ -39,7 +39,7 @@ class SevenDayStrip extends StatelessWidget {
                   color: Colors.grey.shade400,
                   fontSize: 13,
                   fontWeight: FontWeight.w500)),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(7, (i) {
@@ -76,7 +76,7 @@ class SevenDayStrip extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: 4),
                     Text(_dayLabel(i),
                         style: TextStyle(
                             color: Colors.grey.shade600, fontSize: 10)),

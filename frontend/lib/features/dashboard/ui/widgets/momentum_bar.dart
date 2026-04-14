@@ -4,7 +4,7 @@ import '../../../../core/constants/app_colors.dart';
 class MomentumBar extends StatelessWidget {
   final double percentage;
 
-  const MomentumBar({super.key, required this.percentage});
+  MomentumBar({super.key, required this.percentage});
 
   Color _barColor(double pct) {
     if (pct >= 80) return AppColors.scoreGreen;
@@ -36,7 +36,7 @@ class MomentumBar extends StatelessWidget {
                     fontWeight: FontWeight.bold)),
           ],
         ),
-        const SizedBox(height: 6),
+        SizedBox(height: 6),
         ClipRRect(
           borderRadius: BorderRadius.circular(6),
           child: Stack(
@@ -47,7 +47,7 @@ class MomentumBar extends StatelessWidget {
                 color: AppColors.surface,
               ),
               AnimatedContainer(
-                duration: const Duration(milliseconds: 800),
+                duration: Duration(milliseconds: 800),
                 curve: Curves.easeOutCubic,
                 height: 10,
                 width: MediaQuery.of(context).size.width * clampedPct,
@@ -63,7 +63,7 @@ class MomentumBar extends StatelessWidget {
                     BoxShadow(
                       color: color.withOpacity(0.4),
                       blurRadius: 8,
-                      offset: const Offset(0, 0),
+                      offset: Offset(0, 0),
                     ),
                   ],
                 ),

@@ -82,7 +82,7 @@ Future<void> main() async {
         BlocProvider(create: (context) => WeeklyBudgetCubit(context.read<WeeklyBudgetRepository>())),
         BlocProvider(create: (context) => FriendsCubit(context.read<FriendsRepository>())),
       ],
-      child: const ProductivityApp(),
+      child: ProductivityApp(),
     ),
   );
 
@@ -102,7 +102,7 @@ Future<void> main() async {
 }
 
 class ProductivityApp extends StatelessWidget {
-  const ProductivityApp({super.key});
+  ProductivityApp({super.key});
 
   @override
   Widget build(BuildContext context) {

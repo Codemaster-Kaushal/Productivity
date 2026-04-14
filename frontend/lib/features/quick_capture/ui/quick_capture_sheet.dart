@@ -5,7 +5,7 @@ import '../cubit/quick_capture_state.dart';
 import '../../../core/constants/app_colors.dart';
 
 class QuickCaptureSheet extends StatefulWidget {
-  const QuickCaptureSheet({super.key});
+  QuickCaptureSheet({super.key});
 
   static void show(BuildContext context) {
     showModalBottomSheet(
@@ -14,7 +14,7 @@ class QuickCaptureSheet extends StatefulWidget {
       backgroundColor: Colors.transparent,
       builder: (_) => BlocProvider.value(
         value: context.read<QuickCaptureCubit>(),
-        child: const QuickCaptureSheet(),
+        child: QuickCaptureSheet(),
       ),
     );
   }
@@ -49,7 +49,7 @@ class _QuickCaptureSheetState extends State<QuickCaptureSheet> {
 
     return Container(
       padding: EdgeInsets.only(bottom: bottomInset),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: Color(0xFF1A1A2E),
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -67,22 +67,22 @@ class _QuickCaptureSheetState extends State<QuickCaptureSheet> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // Title
             Row(
               children: [
                 Icon(Icons.bolt_rounded,
                     color: AppColors.scoreAmber, size: 22),
-                const SizedBox(width: 8),
-                const Text('Quick Capture',
+                SizedBox(width: 8),
+                Text('Quick Capture',
                     style: TextStyle(
                         color: AppColors.textPrimary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold)),
               ],
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -90,7 +90,7 @@ class _QuickCaptureSheetState extends State<QuickCaptureSheet> {
                 style: TextStyle(color: Colors.grey.shade500, fontSize: 13),
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
 
             // Input field
             BlocConsumer<QuickCaptureCubit, QuickCaptureState>(
@@ -102,9 +102,9 @@ class _QuickCaptureSheetState extends State<QuickCaptureSheet> {
                       SnackBar(
                         content: Row(
                           children: [
-                            const Icon(Icons.check_circle,
+                            Icon(Icons.check_circle,
                                 color: Colors.white, size: 18),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 'Added $type: "$title"',
@@ -164,11 +164,11 @@ class _QuickCaptureSheetState extends State<QuickCaptureSheet> {
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 14),
                         ),
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: AppColors.textPrimary, fontSize: 15),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    SizedBox(width: 10),
                     Container(
                       decoration: BoxDecoration(
                         color: AppColors.primary,
@@ -185,12 +185,12 @@ class _QuickCaptureSheetState extends State<QuickCaptureSheet> {
                                 }
                               },
                         icon: isParsing
-                            ? const SizedBox(
+                            ? SizedBox(
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
                                     color: Colors.white, strokeWidth: 2))
-                            : const Icon(Icons.send_rounded,
+                            : Icon(Icons.send_rounded,
                                 color: Colors.white),
                       ),
                     ),
@@ -199,7 +199,7 @@ class _QuickCaptureSheetState extends State<QuickCaptureSheet> {
               },
             ),
 
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
           ],
         ),
       ),

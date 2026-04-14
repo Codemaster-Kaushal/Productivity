@@ -33,7 +33,7 @@ class SyncEngine {
   // Debounced — only fires 30 seconds after last mutation
   void _scheduleSyncDebounced() {
     _debounceTimer?.cancel();
-    _debounceTimer = Timer(const Duration(seconds: 30), () => flush());
+    _debounceTimer = Timer(Duration(seconds: 30), () => flush());
   }
 
   // Also call on app foreground and app background events

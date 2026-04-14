@@ -5,7 +5,7 @@ import '../cubit/auth_cubit.dart';
 import '../../../core/constants/app_colors.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+  SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -30,7 +30,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
     if (password != confirm) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
+        SnackBar(
           content: Text('Passwords do not match', style: TextStyle(color: Colors.white)),
           backgroundColor: AppColors.scoreRed,
         ),
@@ -53,7 +53,7 @@ class _SignupScreenState extends State<SignupScreen> {
             authenticated: (_) => context.go('/dashboard'),
             error: (msg) => ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(msg, style: const TextStyle(color: Colors.white)),
+                content: Text(msg, style: TextStyle(color: Colors.white)),
                 backgroundColor: AppColors.scoreRed,
               ),
             ),
@@ -67,7 +67,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Create Account',
                     style: TextStyle(
                       fontSize: 32,
@@ -75,57 +75,57 @@ class _SignupScreenState extends State<SignupScreen> {
                       color: AppColors.primary,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'Sign up to start tracking your productivity',
                     style: TextStyle(color: AppColors.textSecondary, fontSize: 14),
                   ),
-                  const SizedBox(height: 48),
+                  SizedBox(height: 48),
                   TextField(
                     controller: _emailController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.email_outlined),
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   TextField(
                     controller: _passwordController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.lock_outline),
                     ),
                     obscureText: true,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   TextField(
                     controller: _confirmPasswordController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       border: OutlineInputBorder(),
                       prefixIcon: Icon(Icons.lock_outline),
                     ),
                     obscureText: true,
                   ),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   state.maybeWhen(
-                    loading: () => const CircularProgressIndicator(),
+                    loading: () => CircularProgressIndicator(),
                     orElse: () => ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
-                        minimumSize: const Size(double.infinity, 50),
+                        minimumSize: Size(double.infinity, 50),
                       ),
                       onPressed: _handleSignup,
-                      child: const Text('Sign Up', style: TextStyle(fontSize: 16)),
+                      child: Text('Sign Up', style: TextStyle(fontSize: 16)),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   TextButton(
                     onPressed: () => context.go('/login'),
-                    child: const Text('Already have an account? Login'),
+                    child: Text('Already have an account? Login'),
                   ),
                 ],
               ),

@@ -1,60 +1,60 @@
 import 'package:flutter/material.dart';
 
-/// Aurora Design System — Color Palette
 class AppColors {
   AppColors._();
 
-  // ── Backgrounds ──
-  static const Color background = Color(0xFF0D0D12);
-  static const Color surface = Color(0xFF1A1A2E);
-  static const Color surfaceLight = Color(0xFF2A2A3E);
-  static const Color surfaceBorder = Color(0xFF333348);
+  // Root & Backgrounds
+  static const Color background = Color(0xFF0E0E11);
+  static const Color surface = Color(0xFF0E0E11);
+  static const Color surfaceContainerLow = Color(0xFF131316);
+  static const Color surfaceContainerHigh = Color(0xFF1F1F23);
+  static const Color surfaceVariant = Color(0xFF25252A);
+  static const Color surfaceBright = Color(0xFF2C2C30);
+  
+  // Core Accents
+  static const Color primary = Color(0xFFBA9EFF);
+  static const Color primaryDim = Color(0xFF8455EF);
+  static const Color secondary = Color(0xFFEC63FF);
+  static const Color tertiary = Color(0xFFD1C4FF);
+  static const Color tertiaryFixed = Color(0xFFC3B4FC);
 
-  // ── Primary (Purple → Magenta gradient) ──
-  static const Color primary = Color(0xFFA855F7);
-  static const Color primaryLight = Color(0xFFC084FC);
-  static const Color primaryDark = Color(0xFF7C3AED);
-  static const Color accent = Color(0xFFD946EF);
-  static const Color accentPink = Color(0xFFEC4899);
+  // Text & Content Elements
+  static const Color onSurface = Color(0xFFFBF8FC);
+  static const Color onSurfaceVariant = Color(0xFFACAAAE);
+  static const Color outline = Color(0xFF767578);
+  static const Color outlineVariant = Color(0xFF48474B);
+  
+  static const Color onPrimaryFixed = Color(0xFF000000);
 
-  // ── Text ──
-  static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFF9CA3AF);
-  static const Color textMuted = Color(0xFF6B7280);
-
-  // ── Status ──
-  static const Color scoreGreen = Color(0xFF22C55E);
-  static const Color scoreTeal = Color(0xFF14B8A6);
-  static const Color scoreAmber = Color(0xFFF59E0B);
+  // Status & Utility Colors
+  static const Color error = Color(0xFFFF6E84);
+  static const Color scoreGreen = Color(0xFF4ADE80);
+  static const Color scoreAmber = Color(0xFFFBBF24);
   static const Color scoreOrange = Color(0xFFF97316);
   static const Color scoreRed = Color(0xFFEF4444);
-
-  // ── Gradients ──
-  static const LinearGradient primaryGradient = LinearGradient(
-    colors: [primary, accent],
+  static const Color scoreTeal = Color(0xFF2DD4BF);
+  
+  // Backwards compatibility references for standard components
+  static Color get textPrimary => onSurface;
+  static Color get textSecondary => onSurfaceVariant;
+  static Color get textMuted => outline;
+  static Color get surfaceBorder => outlineVariant;
+  static Color get surfaceLight => surfaceVariant;
+  static Color get primaryLight => tertiary;
+  static Color get navActive => secondary;
+  static Color get navInactive => onSurfaceVariant;
+  
+  static final LinearGradient primaryGradient = const LinearGradient(
+    colors: [primary, secondary],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
-  static const LinearGradient primaryHorizontalGradient = LinearGradient(
-    colors: [primary, accent],
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-  );
-
-  static const LinearGradient surfaceGradient = LinearGradient(
-    colors: [Color(0xFF1A1A2E), Color(0xFF1E1E3A)],
+  static final LinearGradient surfaceGradient = const LinearGradient(
+    colors: [surfaceContainerLow, surfaceContainerHigh],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
-  static const LinearGradient pinkGradient = LinearGradient(
-    colors: [accent, accentPink],
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-  );
-
-  // ── Nav ──
-  static const Color navActive = primary;
-  static const Color navInactive = Color(0xFF6B7280);
+  static const Color accent = secondary;
 }

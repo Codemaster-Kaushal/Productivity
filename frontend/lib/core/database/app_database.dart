@@ -10,7 +10,7 @@ class Goals extends Table {
   TextColumn get title => text()();
   TextColumn get subject => text()();
   TextColumn get date => text()();
-  BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
+  BoolColumn get isCompleted => boolean().withDefault(Constant(false))();
   TextColumn? get semesterGoalId => text().nullable()();
   TextColumn? get focusWindowStart => text().nullable()();
   TextColumn? get focusWindowEnd => text().nullable()();
@@ -27,7 +27,7 @@ class Tasks extends Table {
   TextColumn get userId => text()();
   TextColumn get title => text()();
   TextColumn get date => text()();
-  BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
+  BoolColumn get isCompleted => boolean().withDefault(Constant(false))();
   TextColumn? get linkedGoalId => text().nullable()();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn? get syncedAt => dateTime().nullable()();
@@ -41,7 +41,7 @@ class PomodoroSessions extends Table {
   TextColumn get id => text()();
   TextColumn get userId => text()();
   TextColumn? get linkedGoalId => text().nullable()();
-  IntColumn get durationMinutes => integer().withDefault(const Constant(25))();
+  IntColumn get durationMinutes => integer().withDefault(Constant(25))();
   DateTimeColumn get startedAt => dateTime()();
   DateTimeColumn? get completedAt => dateTime().nullable()();
   TextColumn get idempotencyKey => text().unique()();
@@ -92,7 +92,7 @@ class DailyScores extends Table {
   IntColumn get journalPoints => integer()();
   IntColumn get activePoints => integer()();
   IntColumn get penaltyPoints => integer()();
-  BoolColumn get focusBadgeEarned => boolean().withDefault(const Constant(false))();
+  BoolColumn get focusBadgeEarned => boolean().withDefault(Constant(false))();
   DateTimeColumn? get syncedAt => dateTime().nullable()();
   DateTimeColumn? get deletedAt => dateTime().nullable()();
 
@@ -105,7 +105,7 @@ class SemesterGoals extends Table {
   TextColumn get userId => text()();
   TextColumn get title => text()();
   TextColumn get targetDate => text()();
-  BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
+  BoolColumn get isCompleted => boolean().withDefault(Constant(false))();
   DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn? get syncedAt => dateTime().nullable()();
 

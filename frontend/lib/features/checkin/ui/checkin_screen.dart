@@ -7,7 +7,7 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/theme/aurora_theme.dart';
 
 class CheckinScreen extends StatefulWidget {
-  const CheckinScreen({super.key});
+  CheckinScreen({super.key});
 
   @override
   State<CheckinScreen> createState() => _CheckinScreenState();
@@ -44,12 +44,12 @@ class _CheckinScreenState extends State<CheckinScreen> {
             saved: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: const Text('Reflection synced to vault. ✨'),
+                  content: Text('Reflection synced to vault. ✨'),
                   backgroundColor: AppColors.primary,
                   behavior: SnackBarBehavior.floating,
                 ),
               );
-              Future.delayed(const Duration(seconds: 1), () {
+              Future.delayed(Duration(seconds: 1), () {
                 if (mounted) context.read<CheckinCubit>().reset();
               });
             },
@@ -74,17 +74,17 @@ class _CheckinScreenState extends State<CheckinScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AuroraTheme.sectionHeader('Aurora Reflection Center'),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
 
                 Text('DAILY PULSE', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text('Evening Reflection', style: AppTextStyles.h1),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 Text(
                   'Capture the essence of your journey today. Align your energy with your\ncelestial path.',
                   style: AppTextStyles.bodySecondary,
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
 
                 // Metrics Row Component
                 LayoutBuilder(
@@ -94,9 +94,9 @@ class _CheckinScreenState extends State<CheckinScreen> {
                       return Row(
                         children: [
                           Expanded(child: _buildMetricCard('Energy', '01', Icons.bolt, 'How much vital force did you feel flowing through your tasks?', 'STATIC', 'KINETIC', _energy, (v) => setState(() => _energy = v))),
-                          const SizedBox(width: 16),
+                          SizedBox(width: 16),
                           Expanded(child: _buildMetricCard('Focus', '02', Icons.center_focus_strong, 'Degree of immersion in your deep work and intentional moments.', 'DIFFUSE', 'LASER', _focus, (v) => setState(() => _focus = v))),
-                          const SizedBox(width: 16),
+                          SizedBox(width: 16),
                           Expanded(child: _buildMetricCard('Mood', '03', Icons.auto_awesome, 'The emotional resonance of your day. High or low frequency?', 'MELANCHOLY', 'EUPHORIA', _mood, (v) => setState(() => _mood = v))),
                         ],
                       );
@@ -104,9 +104,9 @@ class _CheckinScreenState extends State<CheckinScreen> {
                       return Column(
                         children: [
                           _buildMetricCard('Energy', '01', Icons.bolt, 'How much vital force did you feel flowing through your tasks?', 'STATIC', 'KINETIC', _energy, (v) => setState(() => _energy = v)),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           _buildMetricCard('Focus', '02', Icons.center_focus_strong, 'Degree of immersion in your deep work and intentional moments.', 'DIFFUSE', 'LASER', _focus, (v) => setState(() => _focus = v)),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           _buildMetricCard('Mood', '03', Icons.auto_awesome, 'The emotional resonance of your day. High or low frequency?', 'MELANCHOLY', 'EUPHORIA', _mood, (v) => setState(() => _mood = v)),
                         ],
                       );
@@ -114,7 +114,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
                   },
                 ),
                 
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
 
                 // Bottom Section: Notes + Snapshot
                 LayoutBuilder(
@@ -128,7 +128,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('INTERNAL MONOLOGUE', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           TextField(
                             controller: _noteController,
                             maxLines: 5,
@@ -139,13 +139,13 @@ class _CheckinScreenState extends State<CheckinScreen> {
                               border: InputBorder.none,
                             ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: 16),
                           Row(
                             children: [
                               AuroraTheme.statusTag('#productivity', color: AppColors.textSecondary),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               AuroraTheme.statusTag('#alignment', color: AppColors.textSecondary),
-                              const SizedBox(width: 8),
+                              SizedBox(width: 8),
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
@@ -167,12 +167,12 @@ class _CheckinScreenState extends State<CheckinScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Celestial Snapshot', style: AppTextStyles.h3),
-                          const SizedBox(height: 12),
+                          SizedBox(height: 12),
                           Text(
                             'Your current stats indicate a high-focus day. Tomorrow\'s forecast suggests prioritizing rest.',
                             style: AppTextStyles.bodySecondary,
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -180,11 +180,11 @@ class _CheckinScreenState extends State<CheckinScreen> {
                               Text('12 DAY STREAK', style: AppTextStyles.label.copyWith(color: AppColors.primary)),
                             ],
                           ),
-                          const SizedBox(height: 32),
+                          SizedBox(height: 32),
                           SizedBox(
                             width: double.infinity,
                             child: isSaving
-                              ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
+                              ? Center(child: CircularProgressIndicator(color: AppColors.primary))
                               : AuroraTheme.gradientButton(
                                   text: 'Sync Reflection',
                                   onPressed: _syncReflection,
@@ -199,7 +199,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(flex: 2, child: monologue),
-                          const SizedBox(width: 24),
+                          SizedBox(width: 24),
                           Expanded(flex: 1, child: snapshot),
                         ],
                       );
@@ -207,7 +207,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
                       return Column(
                         children: [
                           monologue,
-                          const SizedBox(height: 24),
+                          SizedBox(height: 24),
                           snapshot,
                         ],
                       );
@@ -236,11 +236,11 @@ class _CheckinScreenState extends State<CheckinScreen> {
               Text('METRIC $numId', style: AppTextStyles.label.copyWith(color: AppColors.textSecondary)),
             ],
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(title, style: AppTextStyles.h3),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Text(desc, style: AppTextStyles.bodySecondary),
-          const SizedBox(height: 32),
+          SizedBox(height: 32),
           SliderTheme(
             data: SliderThemeData(
               activeTrackColor: AppColors.primary,
@@ -257,7 +257,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
               onChanged: (v) => onChanged(v.toInt()),
             ),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -133,7 +133,7 @@ class DashboardRepository {
 
   Future<List<double>> getLast7Scores() async {
     final now = DateTime.now();
-    final sevenDaysAgo = now.subtract(const Duration(days: 6));
+    final sevenDaysAgo = now.subtract(Duration(days: 6));
     final startDate = sevenDaysAgo.toIso8601String().split('T')[0];
 
     try {

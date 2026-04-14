@@ -7,40 +7,40 @@ class $GoalsTable extends Goals with TableInfo<$GoalsTable, Goal>{
 @override final GeneratedDatabase attachedDatabase;
 final String? _alias;
 $GoalsTable(this.attachedDatabase, [this._alias]);
-static const VerificationMeta _idMeta = const VerificationMeta('id');
+static const VerificationMeta _idMeta = VerificationMeta('id');
 @override
 late final GeneratedColumn<String> id = GeneratedColumn<String>('id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+static const VerificationMeta _userIdMeta = VerificationMeta('userId');
 @override
 late final GeneratedColumn<String> userId = GeneratedColumn<String>('user_id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _titleMeta = const VerificationMeta('title');
+static const VerificationMeta _titleMeta = VerificationMeta('title');
 @override
 late final GeneratedColumn<String> title = GeneratedColumn<String>('title', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _subjectMeta = const VerificationMeta('subject');
+static const VerificationMeta _subjectMeta = VerificationMeta('subject');
 @override
 late final GeneratedColumn<String> subject = GeneratedColumn<String>('subject', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _dateMeta = const VerificationMeta('date');
+static const VerificationMeta _dateMeta = VerificationMeta('date');
 @override
 late final GeneratedColumn<String> date = GeneratedColumn<String>('date', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _isCompletedMeta = const VerificationMeta('isCompleted');
+static const VerificationMeta _isCompletedMeta = VerificationMeta('isCompleted');
 @override
-late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>('is_completed', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("is_completed" IN (0, 1))'), defaultValue: const Constant(false));
-static const VerificationMeta _semesterGoalIdMeta = const VerificationMeta('semesterGoalId');
+late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>('is_completed', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("is_completed" IN (0, 1))'), defaultValue: Constant(false));
+static const VerificationMeta _semesterGoalIdMeta = VerificationMeta('semesterGoalId');
 @override
 late final GeneratedColumn<String> semesterGoalId = GeneratedColumn<String>('semester_goal_id', aliasedName, true, type: DriftSqlType.string, requiredDuringInsert: false);
-static const VerificationMeta _focusWindowStartMeta = const VerificationMeta('focusWindowStart');
+static const VerificationMeta _focusWindowStartMeta = VerificationMeta('focusWindowStart');
 @override
 late final GeneratedColumn<String> focusWindowStart = GeneratedColumn<String>('focus_window_start', aliasedName, true, type: DriftSqlType.string, requiredDuringInsert: false);
-static const VerificationMeta _focusWindowEndMeta = const VerificationMeta('focusWindowEnd');
+static const VerificationMeta _focusWindowEndMeta = VerificationMeta('focusWindowEnd');
 @override
 late final GeneratedColumn<String> focusWindowEnd = GeneratedColumn<String>('focus_window_end', aliasedName, true, type: DriftSqlType.string, requiredDuringInsert: false);
-static const VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
+static const VerificationMeta _createdAtMeta = VerificationMeta('createdAt');
 @override
 late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>('created_at', aliasedName, false, type: DriftSqlType.dateTime, requiredDuringInsert: true);
-static const VerificationMeta _syncedAtMeta = const VerificationMeta('syncedAt');
+static const VerificationMeta _syncedAtMeta = VerificationMeta('syncedAt');
 @override
 late final GeneratedColumn<DateTime> syncedAt = GeneratedColumn<DateTime>('synced_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
-static const VerificationMeta _deletedAtMeta = const VerificationMeta('deletedAt');
+static const VerificationMeta _deletedAtMeta = VerificationMeta('deletedAt');
 @override
 late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>('deleted_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
 @override
@@ -107,7 +107,7 @@ final String? focusWindowEnd;
 final DateTime createdAt;
 final DateTime? syncedAt;
 final DateTime? deletedAt;
-const Goal({required this.id, required this.userId, required this.title, required this.subject, required this.date, required this.isCompleted, this.semesterGoalId, this.focusWindowStart, this.focusWindowEnd, required this.createdAt, this.syncedAt, this.deletedAt});@override
+Goal({required this.id, required this.userId, required this.title, required this.subject, required this.date, required this.isCompleted, this.semesterGoalId, this.focusWindowStart, this.focusWindowEnd, required this.createdAt, this.syncedAt, this.deletedAt});@override
 Map<String, Expression> toColumns(bool nullToAbsent) {
 final map = <String, Expression> {};map['id'] = Variable<String>(id);
 map['user_id'] = Variable<String>(userId);
@@ -155,7 +155,7 @@ final Value<DateTime> createdAt;
 final Value<DateTime?> syncedAt;
 final Value<DateTime?> deletedAt;
 final Value<int> rowid;
-const GoalsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.title = const Value.absent(),this.subject = const Value.absent(),this.date = const Value.absent(),this.isCompleted = const Value.absent(),this.semesterGoalId = const Value.absent(),this.focusWindowStart = const Value.absent(),this.focusWindowEnd = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
+GoalsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.title = const Value.absent(),this.subject = const Value.absent(),this.date = const Value.absent(),this.isCompleted = const Value.absent(),this.semesterGoalId = const Value.absent(),this.focusWindowStart = const Value.absent(),this.focusWindowEnd = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
 GoalsCompanion.insert({required String id,required String userId,required String title,required String subject,required String date,this.isCompleted = const Value.absent(),this.semesterGoalId = const Value.absent(),this.focusWindowStart = const Value.absent(),this.focusWindowEnd = const Value.absent(),required DateTime createdAt,this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),}): id = Value(id), userId = Value(userId), title = Value(title), subject = Value(subject), date = Value(date), createdAt = Value(createdAt);
 static Insertable<Goal> custom({Expression<String>? id, 
 Expression<String>? userId, 
@@ -212,31 +212,31 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task>{
 @override final GeneratedDatabase attachedDatabase;
 final String? _alias;
 $TasksTable(this.attachedDatabase, [this._alias]);
-static const VerificationMeta _idMeta = const VerificationMeta('id');
+static const VerificationMeta _idMeta = VerificationMeta('id');
 @override
 late final GeneratedColumn<String> id = GeneratedColumn<String>('id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+static const VerificationMeta _userIdMeta = VerificationMeta('userId');
 @override
 late final GeneratedColumn<String> userId = GeneratedColumn<String>('user_id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _titleMeta = const VerificationMeta('title');
+static const VerificationMeta _titleMeta = VerificationMeta('title');
 @override
 late final GeneratedColumn<String> title = GeneratedColumn<String>('title', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _dateMeta = const VerificationMeta('date');
+static const VerificationMeta _dateMeta = VerificationMeta('date');
 @override
 late final GeneratedColumn<String> date = GeneratedColumn<String>('date', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _isCompletedMeta = const VerificationMeta('isCompleted');
+static const VerificationMeta _isCompletedMeta = VerificationMeta('isCompleted');
 @override
-late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>('is_completed', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("is_completed" IN (0, 1))'), defaultValue: const Constant(false));
-static const VerificationMeta _linkedGoalIdMeta = const VerificationMeta('linkedGoalId');
+late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>('is_completed', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("is_completed" IN (0, 1))'), defaultValue: Constant(false));
+static const VerificationMeta _linkedGoalIdMeta = VerificationMeta('linkedGoalId');
 @override
 late final GeneratedColumn<String> linkedGoalId = GeneratedColumn<String>('linked_goal_id', aliasedName, true, type: DriftSqlType.string, requiredDuringInsert: false);
-static const VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
+static const VerificationMeta _createdAtMeta = VerificationMeta('createdAt');
 @override
 late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>('created_at', aliasedName, false, type: DriftSqlType.dateTime, requiredDuringInsert: true);
-static const VerificationMeta _syncedAtMeta = const VerificationMeta('syncedAt');
+static const VerificationMeta _syncedAtMeta = VerificationMeta('syncedAt');
 @override
 late final GeneratedColumn<DateTime> syncedAt = GeneratedColumn<DateTime>('synced_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
-static const VerificationMeta _deletedAtMeta = const VerificationMeta('deletedAt');
+static const VerificationMeta _deletedAtMeta = VerificationMeta('deletedAt');
 @override
 late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>('deleted_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
 @override
@@ -294,7 +294,7 @@ final String? linkedGoalId;
 final DateTime createdAt;
 final DateTime? syncedAt;
 final DateTime? deletedAt;
-const Task({required this.id, required this.userId, required this.title, required this.date, required this.isCompleted, this.linkedGoalId, required this.createdAt, this.syncedAt, this.deletedAt});@override
+Task({required this.id, required this.userId, required this.title, required this.date, required this.isCompleted, this.linkedGoalId, required this.createdAt, this.syncedAt, this.deletedAt});@override
 Map<String, Expression> toColumns(bool nullToAbsent) {
 final map = <String, Expression> {};map['id'] = Variable<String>(id);
 map['user_id'] = Variable<String>(userId);
@@ -336,7 +336,7 @@ final Value<DateTime> createdAt;
 final Value<DateTime?> syncedAt;
 final Value<DateTime?> deletedAt;
 final Value<int> rowid;
-const TasksCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.title = const Value.absent(),this.date = const Value.absent(),this.isCompleted = const Value.absent(),this.linkedGoalId = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
+TasksCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.title = const Value.absent(),this.date = const Value.absent(),this.isCompleted = const Value.absent(),this.linkedGoalId = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
 TasksCompanion.insert({required String id,required String userId,required String title,required String date,this.isCompleted = const Value.absent(),this.linkedGoalId = const Value.absent(),required DateTime createdAt,this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),}): id = Value(id), userId = Value(userId), title = Value(title), date = Value(date), createdAt = Value(createdAt);
 static Insertable<Task> custom({Expression<String>? id, 
 Expression<String>? userId, 
@@ -384,31 +384,31 @@ class $PomodoroSessionsTable extends PomodoroSessions with TableInfo<$PomodoroSe
 @override final GeneratedDatabase attachedDatabase;
 final String? _alias;
 $PomodoroSessionsTable(this.attachedDatabase, [this._alias]);
-static const VerificationMeta _idMeta = const VerificationMeta('id');
+static const VerificationMeta _idMeta = VerificationMeta('id');
 @override
 late final GeneratedColumn<String> id = GeneratedColumn<String>('id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+static const VerificationMeta _userIdMeta = VerificationMeta('userId');
 @override
 late final GeneratedColumn<String> userId = GeneratedColumn<String>('user_id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _linkedGoalIdMeta = const VerificationMeta('linkedGoalId');
+static const VerificationMeta _linkedGoalIdMeta = VerificationMeta('linkedGoalId');
 @override
 late final GeneratedColumn<String> linkedGoalId = GeneratedColumn<String>('linked_goal_id', aliasedName, true, type: DriftSqlType.string, requiredDuringInsert: false);
-static const VerificationMeta _durationMinutesMeta = const VerificationMeta('durationMinutes');
+static const VerificationMeta _durationMinutesMeta = VerificationMeta('durationMinutes');
 @override
-late final GeneratedColumn<int> durationMinutes = GeneratedColumn<int>('duration_minutes', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: false, defaultValue: const Constant(25));
-static const VerificationMeta _startedAtMeta = const VerificationMeta('startedAt');
+late final GeneratedColumn<int> durationMinutes = GeneratedColumn<int>('duration_minutes', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: false, defaultValue: Constant(25));
+static const VerificationMeta _startedAtMeta = VerificationMeta('startedAt');
 @override
 late final GeneratedColumn<DateTime> startedAt = GeneratedColumn<DateTime>('started_at', aliasedName, false, type: DriftSqlType.dateTime, requiredDuringInsert: true);
-static const VerificationMeta _completedAtMeta = const VerificationMeta('completedAt');
+static const VerificationMeta _completedAtMeta = VerificationMeta('completedAt');
 @override
 late final GeneratedColumn<DateTime> completedAt = GeneratedColumn<DateTime>('completed_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
-static const VerificationMeta _idempotencyKeyMeta = const VerificationMeta('idempotencyKey');
+static const VerificationMeta _idempotencyKeyMeta = VerificationMeta('idempotencyKey');
 @override
 late final GeneratedColumn<String> idempotencyKey = GeneratedColumn<String>('idempotency_key', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true, defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
-static const VerificationMeta _syncedAtMeta = const VerificationMeta('syncedAt');
+static const VerificationMeta _syncedAtMeta = VerificationMeta('syncedAt');
 @override
 late final GeneratedColumn<DateTime> syncedAt = GeneratedColumn<DateTime>('synced_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
-static const VerificationMeta _deletedAtMeta = const VerificationMeta('deletedAt');
+static const VerificationMeta _deletedAtMeta = VerificationMeta('deletedAt');
 @override
 late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>('deleted_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
 @override
@@ -463,7 +463,7 @@ final DateTime? completedAt;
 final String idempotencyKey;
 final DateTime? syncedAt;
 final DateTime? deletedAt;
-const PomodoroSession({required this.id, required this.userId, this.linkedGoalId, required this.durationMinutes, required this.startedAt, this.completedAt, required this.idempotencyKey, this.syncedAt, this.deletedAt});@override
+PomodoroSession({required this.id, required this.userId, this.linkedGoalId, required this.durationMinutes, required this.startedAt, this.completedAt, required this.idempotencyKey, this.syncedAt, this.deletedAt});@override
 Map<String, Expression> toColumns(bool nullToAbsent) {
 final map = <String, Expression> {};map['id'] = Variable<String>(id);
 map['user_id'] = Variable<String>(userId);
@@ -505,7 +505,7 @@ final Value<String> idempotencyKey;
 final Value<DateTime?> syncedAt;
 final Value<DateTime?> deletedAt;
 final Value<int> rowid;
-const PomodoroSessionsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.linkedGoalId = const Value.absent(),this.durationMinutes = const Value.absent(),this.startedAt = const Value.absent(),this.completedAt = const Value.absent(),this.idempotencyKey = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
+PomodoroSessionsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.linkedGoalId = const Value.absent(),this.durationMinutes = const Value.absent(),this.startedAt = const Value.absent(),this.completedAt = const Value.absent(),this.idempotencyKey = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
 PomodoroSessionsCompanion.insert({required String id,required String userId,this.linkedGoalId = const Value.absent(),this.durationMinutes = const Value.absent(),required DateTime startedAt,this.completedAt = const Value.absent(),required String idempotencyKey,this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),}): id = Value(id), userId = Value(userId), startedAt = Value(startedAt), idempotencyKey = Value(idempotencyKey);
 static Insertable<PomodoroSession> custom({Expression<String>? id, 
 Expression<String>? userId, 
@@ -553,28 +553,28 @@ class $JournalEntriesTable extends JournalEntries with TableInfo<$JournalEntries
 @override final GeneratedDatabase attachedDatabase;
 final String? _alias;
 $JournalEntriesTable(this.attachedDatabase, [this._alias]);
-static const VerificationMeta _idMeta = const VerificationMeta('id');
+static const VerificationMeta _idMeta = VerificationMeta('id');
 @override
 late final GeneratedColumn<String> id = GeneratedColumn<String>('id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+static const VerificationMeta _userIdMeta = VerificationMeta('userId');
 @override
 late final GeneratedColumn<String> userId = GeneratedColumn<String>('user_id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _dateMeta = const VerificationMeta('date');
+static const VerificationMeta _dateMeta = VerificationMeta('date');
 @override
 late final GeneratedColumn<String> date = GeneratedColumn<String>('date', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true, defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
-static const VerificationMeta _contentMeta = const VerificationMeta('content');
+static const VerificationMeta _contentMeta = VerificationMeta('content');
 @override
 late final GeneratedColumn<String> content = GeneratedColumn<String>('content', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _aiPromptsMeta = const VerificationMeta('aiPrompts');
+static const VerificationMeta _aiPromptsMeta = VerificationMeta('aiPrompts');
 @override
 late final GeneratedColumn<String> aiPrompts = GeneratedColumn<String>('ai_prompts', aliasedName, true, type: DriftSqlType.string, requiredDuringInsert: false);
-static const VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
+static const VerificationMeta _createdAtMeta = VerificationMeta('createdAt');
 @override
 late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>('created_at', aliasedName, false, type: DriftSqlType.dateTime, requiredDuringInsert: true);
-static const VerificationMeta _syncedAtMeta = const VerificationMeta('syncedAt');
+static const VerificationMeta _syncedAtMeta = VerificationMeta('syncedAt');
 @override
 late final GeneratedColumn<DateTime> syncedAt = GeneratedColumn<DateTime>('synced_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
-static const VerificationMeta _deletedAtMeta = const VerificationMeta('deletedAt');
+static const VerificationMeta _deletedAtMeta = VerificationMeta('deletedAt');
 @override
 late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>('deleted_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
 @override
@@ -630,7 +630,7 @@ final String? aiPrompts;
 final DateTime createdAt;
 final DateTime? syncedAt;
 final DateTime? deletedAt;
-const JournalEntry({required this.id, required this.userId, required this.date, required this.content, this.aiPrompts, required this.createdAt, this.syncedAt, this.deletedAt});@override
+JournalEntry({required this.id, required this.userId, required this.date, required this.content, this.aiPrompts, required this.createdAt, this.syncedAt, this.deletedAt});@override
 Map<String, Expression> toColumns(bool nullToAbsent) {
 final map = <String, Expression> {};map['id'] = Variable<String>(id);
 map['user_id'] = Variable<String>(userId);
@@ -670,7 +670,7 @@ final Value<DateTime> createdAt;
 final Value<DateTime?> syncedAt;
 final Value<DateTime?> deletedAt;
 final Value<int> rowid;
-const JournalEntriesCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.date = const Value.absent(),this.content = const Value.absent(),this.aiPrompts = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
+JournalEntriesCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.date = const Value.absent(),this.content = const Value.absent(),this.aiPrompts = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
 JournalEntriesCompanion.insert({required String id,required String userId,required String date,required String content,this.aiPrompts = const Value.absent(),required DateTime createdAt,this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),}): id = Value(id), userId = Value(userId), date = Value(date), content = Value(content), createdAt = Value(createdAt);
 static Insertable<JournalEntry> custom({Expression<String>? id, 
 Expression<String>? userId, 
@@ -715,28 +715,28 @@ class $SyncOperationsTable extends SyncOperations with TableInfo<$SyncOperations
 @override final GeneratedDatabase attachedDatabase;
 final String? _alias;
 $SyncOperationsTable(this.attachedDatabase, [this._alias]);
-static const VerificationMeta _idMeta = const VerificationMeta('id');
+static const VerificationMeta _idMeta = VerificationMeta('id');
 @override
 late final GeneratedColumn<String> id = GeneratedColumn<String>('id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+static const VerificationMeta _userIdMeta = VerificationMeta('userId');
 @override
 late final GeneratedColumn<String> userId = GeneratedColumn<String>('user_id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _operationTypeMeta = const VerificationMeta('operationType');
+static const VerificationMeta _operationTypeMeta = VerificationMeta('operationType');
 @override
 late final GeneratedColumn<String> operationType = GeneratedColumn<String>('operation_type', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _payloadMeta = const VerificationMeta('payload');
+static const VerificationMeta _payloadMeta = VerificationMeta('payload');
 @override
 late final GeneratedColumn<String> payload = GeneratedColumn<String>('payload', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _idempotencyKeyMeta = const VerificationMeta('idempotencyKey');
+static const VerificationMeta _idempotencyKeyMeta = VerificationMeta('idempotencyKey');
 @override
 late final GeneratedColumn<String> idempotencyKey = GeneratedColumn<String>('idempotency_key', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true, defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
-static const VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
+static const VerificationMeta _createdAtMeta = VerificationMeta('createdAt');
 @override
 late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>('created_at', aliasedName, false, type: DriftSqlType.dateTime, requiredDuringInsert: true);
-static const VerificationMeta _syncedAtMeta = const VerificationMeta('syncedAt');
+static const VerificationMeta _syncedAtMeta = VerificationMeta('syncedAt');
 @override
 late final GeneratedColumn<DateTime> syncedAt = GeneratedColumn<DateTime>('synced_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
-static const VerificationMeta _deletedAtMeta = const VerificationMeta('deletedAt');
+static const VerificationMeta _deletedAtMeta = VerificationMeta('deletedAt');
 @override
 late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>('deleted_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
 @override
@@ -795,7 +795,7 @@ final String idempotencyKey;
 final DateTime createdAt;
 final DateTime? syncedAt;
 final DateTime? deletedAt;
-const SyncOperation({required this.id, required this.userId, required this.operationType, required this.payload, required this.idempotencyKey, required this.createdAt, this.syncedAt, this.deletedAt});@override
+SyncOperation({required this.id, required this.userId, required this.operationType, required this.payload, required this.idempotencyKey, required this.createdAt, this.syncedAt, this.deletedAt});@override
 Map<String, Expression> toColumns(bool nullToAbsent) {
 final map = <String, Expression> {};map['id'] = Variable<String>(id);
 map['user_id'] = Variable<String>(userId);
@@ -835,7 +835,7 @@ final Value<DateTime> createdAt;
 final Value<DateTime?> syncedAt;
 final Value<DateTime?> deletedAt;
 final Value<int> rowid;
-const SyncOperationsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.operationType = const Value.absent(),this.payload = const Value.absent(),this.idempotencyKey = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
+SyncOperationsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.operationType = const Value.absent(),this.payload = const Value.absent(),this.idempotencyKey = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
 SyncOperationsCompanion.insert({required String id,required String userId,required String operationType,required String payload,required String idempotencyKey,required DateTime createdAt,this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),}): id = Value(id), userId = Value(userId), operationType = Value(operationType), payload = Value(payload), idempotencyKey = Value(idempotencyKey), createdAt = Value(createdAt);
 static Insertable<SyncOperation> custom({Expression<String>? id, 
 Expression<String>? userId, 
@@ -880,46 +880,46 @@ class $DailyScoresTable extends DailyScores with TableInfo<$DailyScoresTable, Da
 @override final GeneratedDatabase attachedDatabase;
 final String? _alias;
 $DailyScoresTable(this.attachedDatabase, [this._alias]);
-static const VerificationMeta _idMeta = const VerificationMeta('id');
+static const VerificationMeta _idMeta = VerificationMeta('id');
 @override
 late final GeneratedColumn<String> id = GeneratedColumn<String>('id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+static const VerificationMeta _userIdMeta = VerificationMeta('userId');
 @override
 late final GeneratedColumn<String> userId = GeneratedColumn<String>('user_id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _dateMeta = const VerificationMeta('date');
+static const VerificationMeta _dateMeta = VerificationMeta('date');
 @override
 late final GeneratedColumn<String> date = GeneratedColumn<String>('date', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _trueScoreMeta = const VerificationMeta('trueScore');
+static const VerificationMeta _trueScoreMeta = VerificationMeta('trueScore');
 @override
 late final GeneratedColumn<int> trueScore = GeneratedColumn<int>('true_score', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: true);
-static const VerificationMeta _verdictMeta = const VerificationMeta('verdict');
+static const VerificationMeta _verdictMeta = VerificationMeta('verdict');
 @override
 late final GeneratedColumn<String> verdict = GeneratedColumn<String>('verdict', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _big3PointsMeta = const VerificationMeta('big3Points');
+static const VerificationMeta _big3PointsMeta = VerificationMeta('big3Points');
 @override
 late final GeneratedColumn<int> big3Points = GeneratedColumn<int>('big3_points', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: true);
-static const VerificationMeta _pomodoroPointsMeta = const VerificationMeta('pomodoroPoints');
+static const VerificationMeta _pomodoroPointsMeta = VerificationMeta('pomodoroPoints');
 @override
 late final GeneratedColumn<int> pomodoroPoints = GeneratedColumn<int>('pomodoro_points', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: true);
-static const VerificationMeta _taskPointsMeta = const VerificationMeta('taskPoints');
+static const VerificationMeta _taskPointsMeta = VerificationMeta('taskPoints');
 @override
 late final GeneratedColumn<int> taskPoints = GeneratedColumn<int>('task_points', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: true);
-static const VerificationMeta _journalPointsMeta = const VerificationMeta('journalPoints');
+static const VerificationMeta _journalPointsMeta = VerificationMeta('journalPoints');
 @override
 late final GeneratedColumn<int> journalPoints = GeneratedColumn<int>('journal_points', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: true);
-static const VerificationMeta _activePointsMeta = const VerificationMeta('activePoints');
+static const VerificationMeta _activePointsMeta = VerificationMeta('activePoints');
 @override
 late final GeneratedColumn<int> activePoints = GeneratedColumn<int>('active_points', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: true);
-static const VerificationMeta _penaltyPointsMeta = const VerificationMeta('penaltyPoints');
+static const VerificationMeta _penaltyPointsMeta = VerificationMeta('penaltyPoints');
 @override
 late final GeneratedColumn<int> penaltyPoints = GeneratedColumn<int>('penalty_points', aliasedName, false, type: DriftSqlType.int, requiredDuringInsert: true);
-static const VerificationMeta _focusBadgeEarnedMeta = const VerificationMeta('focusBadgeEarned');
+static const VerificationMeta _focusBadgeEarnedMeta = VerificationMeta('focusBadgeEarned');
 @override
-late final GeneratedColumn<bool> focusBadgeEarned = GeneratedColumn<bool>('focus_badge_earned', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("focus_badge_earned" IN (0, 1))'), defaultValue: const Constant(false));
-static const VerificationMeta _syncedAtMeta = const VerificationMeta('syncedAt');
+late final GeneratedColumn<bool> focusBadgeEarned = GeneratedColumn<bool>('focus_badge_earned', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("focus_badge_earned" IN (0, 1))'), defaultValue: Constant(false));
+static const VerificationMeta _syncedAtMeta = VerificationMeta('syncedAt');
 @override
 late final GeneratedColumn<DateTime> syncedAt = GeneratedColumn<DateTime>('synced_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
-static const VerificationMeta _deletedAtMeta = const VerificationMeta('deletedAt');
+static const VerificationMeta _deletedAtMeta = VerificationMeta('deletedAt');
 @override
 late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>('deleted_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
 @override
@@ -1005,7 +1005,7 @@ final int penaltyPoints;
 final bool focusBadgeEarned;
 final DateTime? syncedAt;
 final DateTime? deletedAt;
-const DailyScore({required this.id, required this.userId, required this.date, required this.trueScore, required this.verdict, required this.big3Points, required this.pomodoroPoints, required this.taskPoints, required this.journalPoints, required this.activePoints, required this.penaltyPoints, required this.focusBadgeEarned, this.syncedAt, this.deletedAt});@override
+DailyScore({required this.id, required this.userId, required this.date, required this.trueScore, required this.verdict, required this.big3Points, required this.pomodoroPoints, required this.taskPoints, required this.journalPoints, required this.activePoints, required this.penaltyPoints, required this.focusBadgeEarned, this.syncedAt, this.deletedAt});@override
 Map<String, Expression> toColumns(bool nullToAbsent) {
 final map = <String, Expression> {};map['id'] = Variable<String>(id);
 map['user_id'] = Variable<String>(userId);
@@ -1057,7 +1057,7 @@ final Value<bool> focusBadgeEarned;
 final Value<DateTime?> syncedAt;
 final Value<DateTime?> deletedAt;
 final Value<int> rowid;
-const DailyScoresCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.date = const Value.absent(),this.trueScore = const Value.absent(),this.verdict = const Value.absent(),this.big3Points = const Value.absent(),this.pomodoroPoints = const Value.absent(),this.taskPoints = const Value.absent(),this.journalPoints = const Value.absent(),this.activePoints = const Value.absent(),this.penaltyPoints = const Value.absent(),this.focusBadgeEarned = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
+DailyScoresCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.date = const Value.absent(),this.trueScore = const Value.absent(),this.verdict = const Value.absent(),this.big3Points = const Value.absent(),this.pomodoroPoints = const Value.absent(),this.taskPoints = const Value.absent(),this.journalPoints = const Value.absent(),this.activePoints = const Value.absent(),this.penaltyPoints = const Value.absent(),this.focusBadgeEarned = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),});
 DailyScoresCompanion.insert({required String id,required String userId,required String date,required int trueScore,required String verdict,required int big3Points,required int pomodoroPoints,required int taskPoints,required int journalPoints,required int activePoints,required int penaltyPoints,this.focusBadgeEarned = const Value.absent(),this.syncedAt = const Value.absent(),this.deletedAt = const Value.absent(),this.rowid = const Value.absent(),}): id = Value(id), userId = Value(userId), date = Value(date), trueScore = Value(trueScore), verdict = Value(verdict), big3Points = Value(big3Points), pomodoroPoints = Value(pomodoroPoints), taskPoints = Value(taskPoints), journalPoints = Value(journalPoints), activePoints = Value(activePoints), penaltyPoints = Value(penaltyPoints);
 static Insertable<DailyScore> custom({Expression<String>? id, 
 Expression<String>? userId, 
@@ -1120,25 +1120,25 @@ class $SemesterGoalsTable extends SemesterGoals with TableInfo<$SemesterGoalsTab
 @override final GeneratedDatabase attachedDatabase;
 final String? _alias;
 $SemesterGoalsTable(this.attachedDatabase, [this._alias]);
-static const VerificationMeta _idMeta = const VerificationMeta('id');
+static const VerificationMeta _idMeta = VerificationMeta('id');
 @override
 late final GeneratedColumn<String> id = GeneratedColumn<String>('id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+static const VerificationMeta _userIdMeta = VerificationMeta('userId');
 @override
 late final GeneratedColumn<String> userId = GeneratedColumn<String>('user_id', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _titleMeta = const VerificationMeta('title');
+static const VerificationMeta _titleMeta = VerificationMeta('title');
 @override
 late final GeneratedColumn<String> title = GeneratedColumn<String>('title', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _targetDateMeta = const VerificationMeta('targetDate');
+static const VerificationMeta _targetDateMeta = VerificationMeta('targetDate');
 @override
 late final GeneratedColumn<String> targetDate = GeneratedColumn<String>('target_date', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
-static const VerificationMeta _isCompletedMeta = const VerificationMeta('isCompleted');
+static const VerificationMeta _isCompletedMeta = VerificationMeta('isCompleted');
 @override
-late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>('is_completed', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("is_completed" IN (0, 1))'), defaultValue: const Constant(false));
-static const VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
+late final GeneratedColumn<bool> isCompleted = GeneratedColumn<bool>('is_completed', aliasedName, false, type: DriftSqlType.bool, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("is_completed" IN (0, 1))'), defaultValue: Constant(false));
+static const VerificationMeta _createdAtMeta = VerificationMeta('createdAt');
 @override
 late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>('created_at', aliasedName, false, type: DriftSqlType.dateTime, requiredDuringInsert: true);
-static const VerificationMeta _syncedAtMeta = const VerificationMeta('syncedAt');
+static const VerificationMeta _syncedAtMeta = VerificationMeta('syncedAt');
 @override
 late final GeneratedColumn<DateTime> syncedAt = GeneratedColumn<DateTime>('synced_at', aliasedName, true, type: DriftSqlType.dateTime, requiredDuringInsert: false);
 @override
@@ -1192,7 +1192,7 @@ final String targetDate;
 final bool isCompleted;
 final DateTime createdAt;
 final DateTime? syncedAt;
-const SemesterGoal({required this.id, required this.userId, required this.title, required this.targetDate, required this.isCompleted, required this.createdAt, this.syncedAt});@override
+SemesterGoal({required this.id, required this.userId, required this.title, required this.targetDate, required this.isCompleted, required this.createdAt, this.syncedAt});@override
 Map<String, Expression> toColumns(bool nullToAbsent) {
 final map = <String, Expression> {};map['id'] = Variable<String>(id);
 map['user_id'] = Variable<String>(userId);
@@ -1230,7 +1230,7 @@ final Value<bool> isCompleted;
 final Value<DateTime> createdAt;
 final Value<DateTime?> syncedAt;
 final Value<int> rowid;
-const SemesterGoalsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.title = const Value.absent(),this.targetDate = const Value.absent(),this.isCompleted = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.rowid = const Value.absent(),});
+SemesterGoalsCompanion({this.id = const Value.absent(),this.userId = const Value.absent(),this.title = const Value.absent(),this.targetDate = const Value.absent(),this.isCompleted = const Value.absent(),this.createdAt = const Value.absent(),this.syncedAt = const Value.absent(),this.rowid = const Value.absent(),});
 SemesterGoalsCompanion.insert({required String id,required String userId,required String title,required String targetDate,this.isCompleted = const Value.absent(),required DateTime createdAt,this.syncedAt = const Value.absent(),this.rowid = const Value.absent(),}): id = Value(id), userId = Value(userId), title = Value(title), targetDate = Value(targetDate), createdAt = Value(createdAt);
 static Insertable<SemesterGoal> custom({Expression<String>? id, 
 Expression<String>? userId, 

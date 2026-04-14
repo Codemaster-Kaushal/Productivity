@@ -8,7 +8,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 
 class AudioPlayerWidget extends StatelessWidget {
-  const AudioPlayerWidget({super.key});
+  AudioPlayerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,14 @@ class AudioPlayerWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.waves, color: AppColors.primary, size: 18),
-                  const SizedBox(width: 8),
+                  Icon(Icons.waves, color: AppColors.primary, size: 18),
+                  SizedBox(width: 8),
                   Text('Focus Sounds',
                       style: GoogleFonts.inter(
                           color: AppColors.textPrimary,
                           fontSize: 16,
                           fontWeight: FontWeight.w600)),
-                  const Spacer(),
+                  Spacer(),
                   state.maybeWhen(
                     playing: (name, _) => _buildStopButton(context),
                     paused: (name, _) => _buildStopButton(context),
@@ -41,7 +41,7 @@ class AudioPlayerWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Wrap(
                 spacing: 12,
                 runSpacing: 12,
@@ -67,7 +67,7 @@ class AudioPlayerWidget extends StatelessWidget {
                       }
                     },
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
+                      duration: Duration(milliseconds: 200),
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       decoration: BoxDecoration(
                         color: isPlaying ? AppColors.primary.withOpacity(0.15) : AppColors.surfaceLight,
@@ -77,8 +77,8 @@ class AudioPlayerWidget extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(track.icon, style: const TextStyle(fontSize: 16)),
-                          const SizedBox(width: 8),
+                          Text(track.icon, style: TextStyle(fontSize: 16)),
+                          SizedBox(width: 8),
                           Text(track.name,
                               style: GoogleFonts.inter(
                                 color: isPlaying ? AppColors.textPrimary : AppColors.textSecondary,
@@ -91,9 +91,9 @@ class AudioPlayerWidget extends StatelessWidget {
                   );
                 }).toList(),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               Text('VOLUME', style: AppTextStyles.label),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Row(
                 children: [
                   Expanded(
@@ -105,7 +105,7 @@ class AudioPlayerWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16),
                   Text('65%', style: GoogleFonts.inter(fontSize: 12, color: AppColors.primaryLight, fontWeight: FontWeight.w600)),
                 ],
               )
@@ -131,7 +131,7 @@ class AudioPlayerWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.stop_rounded, size: 16, color: AppColors.scoreRed),
-              const SizedBox(width: 4),
+              SizedBox(width: 4),
               Text('Stop',
                   style: TextStyle(color: AppColors.scoreRed, fontSize: 12)),
             ],
