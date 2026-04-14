@@ -22,3 +22,6 @@ class UserProfile(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP")
     )
+    google_access_token: Mapped[str | None] = mapped_column(String, nullable=True)
+    google_refresh_token: Mapped[str | None] = mapped_column(String, nullable=True)
+    google_token_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)

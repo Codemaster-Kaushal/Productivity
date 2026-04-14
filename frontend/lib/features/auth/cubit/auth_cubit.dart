@@ -25,9 +25,13 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void _listenToAuthChanges() {
-    _authSubscription = _repository.authStateChanges.listen((data) {
-      final user = data.session?.user;
-      if (user != null) {
+    _authSubscription = _repository.authStateChanges.listen((data) async {
+      final session = data.session;
+      final user = session?.user;
+
+      if (user != null && session != null) {
+        // Save provider tokens whenever auth state changes
+        await _repository.handleAuthCallback(session);
         emit(AuthState.authenticated(user));
       } else {
         emit(const AuthState.unauthenticated());
@@ -35,52 +39,19 @@ class AuthCubit extends Cubit<AuthState> {
     });
   }
 
-  Future<void> signIn(String email, String password) async {
-    if (email.trim().isEmpty || password.isEmpty) {
-      emit(const AuthState.error('Please enter your email and password.'));
-      return;
-    }
+  Future<void> signInWithGoogle() async {
     emit(const AuthState.loading());
     try {
-      await _repository.signInWithEmail(email, password);
+      await _repository.signInWithGoogle();
+      // State update comes via stream listener above
     } catch (e) {
-      emit(AuthState.error(_friendlyError(e.toString())));
-    }
-  }
-
-  Future<void> signUp(String email, String password) async {
-    if (email.trim().isEmpty || password.isEmpty) {
-      emit(const AuthState.error('Please enter your email and password.'));
-      return;
-    }
-    if (password.length < 6) {
-      emit(const AuthState.error('Password must be at least 6 characters.'));
-      return;
-    }
-    emit(const AuthState.loading());
-    try {
-      await _repository.signUpWithEmail(email, password);
-    } catch (e) {
-      emit(AuthState.error(_friendlyError(e.toString())));
+      emit(const AuthState.error('Sign in failed. Please try again.'));
     }
   }
 
   Future<void> signOut() async {
     await _repository.signOut();
     emit(const AuthState.unauthenticated());
-  }
-
-  String _friendlyError(String raw) {
-    if (raw.contains('Invalid login credentials')) {
-      return 'Incorrect email or password.';
-    }
-    if (raw.contains('User already registered')) {
-      return 'An account with this email already exists.';
-    }
-    if (raw.contains('Email not confirmed')) {
-      return 'Please confirm your email before signing in.';
-    }
-    return 'Something went wrong: $raw';
   }
 
   @override

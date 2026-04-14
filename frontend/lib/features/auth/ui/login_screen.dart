@@ -1,79 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import '../cubit/auth_cubit.dart';
-import '../../../core/constants/app_colors.dart';
+import '../cubit/auth_state.dart';
 
-class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          state.maybeWhen(
-            authenticated: (_) => context.go('/dashboard'),
-            error: (msg) => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(msg, style: TextStyle(color: Colors.white)), backgroundColor: AppColors.scoreRed),
+          state.whenOrNull(
+            error: (message) => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(message)),
             ),
-            orElse: () {},
           );
         },
         builder: (context, state) {
-          return Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text('Productivity', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppColors.primary)),
-                  SizedBox(height: 48),
-                  TextField(
-                    controller: _emailController,
-                    decoration: InputDecoration(labelText: 'Email', border: OutlineInputBorder()),
-                    keyboardType: TextInputType.emailAddress,
+                  const Text(
+                    'Productivity',
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 16),
-                  TextField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(labelText: 'Password', border: OutlineInputBorder()),
-                    obscureText: true,
+                  const SizedBox(height: 12),
+                  const Text(
+                    'The only app that tells you if you actually worked.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16),
                   ),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 64),
                   state.maybeWhen(
-                    loading: () => CircularProgressIndicator(),
-                    orElse: () => ElevatedButton(
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    orElse: () => ElevatedButton.icon(
+                      onPressed: () =>
+                          context.read<AuthCubit>().signInWithGoogle(),
+                      icon: const Icon(Icons.login),
+                      label: const Text('Continue with Google'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        minimumSize: Size(double.infinity, 50),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
-                      onPressed: () => context.read<AuthCubit>().signIn(
-                        _emailController.text,
-                        _passwordController.text,
-                      ),
-                      child: Text('Login', style: TextStyle(fontSize: 16)),
                     ),
                   ),
-                  SizedBox(height: 16),
-                  TextButton(
-                    onPressed: () => context.go('/signup'),
-                    child: Text('Create Account'),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'By signing in you grant access to Google Calendar and Google Fit to power your productivity insights.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12),
                   ),
                 ],
               ),

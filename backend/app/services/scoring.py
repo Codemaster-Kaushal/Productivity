@@ -15,6 +15,7 @@ from app.models.score import DailyScore, XpLog
 from app.models.exam_day import ExamDay
 from app.utils.levels import get_level_for_xp
 from app.services.realtime import broadcast_score_update
+from app.services.google_service import GoogleService
 
 
 # ───────── Verdict Mapping ─────────
@@ -208,7 +209,10 @@ async def calculate_true_score(
     pomodoro_points = min(linked_pomodoros * 10, 30)
     task_points = min(completed_tasks * 5, 25)
     journal_points = 10 if journal and len(journal.content) >= 20 else 0
-    active_points = 0  # steps data comes from client — default 0 for now
+    google_service = GoogleService()
+    steps_today = await google_service.get_todays_steps(str(user_id), db)
+    # Give 10 points per 1000 steps, max 20
+    active_points = min((steps_today // 1000) * 10, 20)
     penalty_points = incomplete_big3 * 20
 
     raw = big3_points + pomodoro_points + task_points + journal_points + active_points - penalty_points
