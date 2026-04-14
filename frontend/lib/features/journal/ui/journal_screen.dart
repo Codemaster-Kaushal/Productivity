@@ -27,7 +27,7 @@ class _JournalScreenState extends State<JournalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Journal', style: AppTextStyles.h2),
+        title: Text('Journal', style: AppTextStyles.h2),
         backgroundColor: AppColors.background,
         elevation: 0,
       ),
@@ -75,12 +75,12 @@ class _JournalScreenState extends State<JournalScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('How are you feeling today?', style: AppTextStyles.h2),
+                        Text('How are you feeling today?', style: AppTextStyles.h2),
                         const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('😞', style: TextStyle(fontSize: 24)),
+                            Text('😞', style: TextStyle(fontSize: 24)),
                             Expanded(
                               child: Slider(
                                 value: _moodScore.toDouble(),
@@ -92,7 +92,7 @@ class _JournalScreenState extends State<JournalScreen> {
                                 onChanged: (val) => setState(() => _moodScore = val.toInt()),
                               ),
                             ),
-                            const Text('😊', style: TextStyle(fontSize: 24)),
+                            Text('😊', style: TextStyle(fontSize: 24)),
                           ],
                         ),
                         const SizedBox(height: 16),
@@ -127,7 +127,7 @@ class _JournalScreenState extends State<JournalScreen> {
                                   context.read<JournalCubit>().saveEntry(_contentController.text, _moodScore);
                                 }
                               },
-                              child: const Text('Save Entry', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                              child: Text('Save Entry', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                             ),
                           ),
                         ),
@@ -138,7 +138,7 @@ class _JournalScreenState extends State<JournalScreen> {
                 ],
 
                 // Past entries
-                const Text('Past Entries', style: AppTextStyles.h2),
+                Text('Past Entries', style: AppTextStyles.h2),
                 const SizedBox(height: 12),
                 state.when(
                   initial: () => const Center(child: CircularProgressIndicator()),
@@ -155,9 +155,9 @@ class _JournalScreenState extends State<JournalScreen> {
                             children: [
                               Icon(Icons.book_outlined, size: 64, color: Colors.grey.shade600),
                               const SizedBox(height: 16),
-                              const Text('No journal entries yet', style: AppTextStyles.bodySecondary),
+                              Text('No journal entries yet', style: AppTextStyles.bodySecondary),
                               const SizedBox(height: 8),
-                              const Text('Tap the ✏️ button to write your first entry!', style: AppTextStyles.bodySecondary),
+                              Text('Tap the ✏️ button to write your first entry!', style: AppTextStyles.bodySecondary),
                             ],
                           ),
                         ),

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,20 +25,20 @@ final appRouter = GoRouter(
     return null;
   },
   routes: [
-    GoRoute(path: '/login', builder: (_, __) => const LoginScreen()),
-    GoRoute(path: '/signup', builder: (_, __) => const SignupScreen()),
+    GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
+    GoRoute(path: '/signup', builder: (_, _) => const SignupScreen()),
     ShellRoute(
       builder: (context, state, child) => MainScaffold(child: child),
       routes: [
-        GoRoute(path: '/dashboard', builder: (_, __) => const DashboardScreen()),
-        GoRoute(path: '/goals', builder: (_, __) => const GoalsScreen()),
-        GoRoute(path: '/pomodoro', builder: (_, __) => const PomodoroScreen()),
-        GoRoute(path: '/checkin', builder: (_, __) => const CheckinScreen()),
-        GoRoute(path: '/journal', builder: (_, __) => const JournalScreen()),
-        GoRoute(path: '/scores', builder: (_, __) => const ScoresScreen()),
-        GoRoute(path: '/semester', builder: (_, __) => const SemesterScreen()),
-        GoRoute(path: '/budget', builder: (_, __) => const WeeklyBudgetScreen()),
-        GoRoute(path: '/friends', builder: (_, __) => const StreakBoardScreen()),
+        GoRoute(path: '/dashboard', builder: (_, _) => const DashboardScreen()),
+        GoRoute(path: '/goals', builder: (_, _) => const GoalsScreen()),
+        GoRoute(path: '/pomodoro', builder: (_, _) => const PomodoroScreen()),
+        GoRoute(path: '/checkin', builder: (_, _) => const CheckinScreen()),
+        GoRoute(path: '/journal', builder: (_, _) => const JournalScreen()),
+        GoRoute(path: '/scores', builder: (_, _) => const ScoresScreen()),
+        GoRoute(path: '/semester', builder: (_, _) => const SemesterScreen()),
+        GoRoute(path: '/budget', builder: (_, _) => const WeeklyBudgetScreen()),
+        GoRoute(path: '/friends', builder: (_, _) => const StreakBoardScreen()),
       ],
     ),
   ],

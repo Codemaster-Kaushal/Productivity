@@ -49,6 +49,7 @@ dependencies:
   sentry_flutter: ^9.15.0
   path_provider: ^2.1.5
   uuid: ^4.5.3
+  google_fonts: ^8.0.2
 
 dev_dependencies:
   drift_dev: ^2.18.0

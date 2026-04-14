@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../cubit/audio_cubit.dart';
 import '../cubit/audio_state.dart';
 import '../data/audio_tracks.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_text_styles.dart';
 
 class AudioPlayerWidget extends StatelessWidget {
   const AudioPlayerWidget({super.key});
@@ -13,45 +15,36 @@ class AudioPlayerWidget extends StatelessWidget {
     return BlocBuilder<AudioCubit, AudioState>(
       builder: (context, state) {
         return Container(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.surfaceBorder.withOpacity(0.3)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const Text('🎧',
-                      style: TextStyle(fontSize: 18)),
+                  const Icon(Icons.waves, color: AppColors.primary, size: 18),
                   const SizedBox(width: 8),
                   Text('Focus Sounds',
-                      style: TextStyle(
-                          color: Colors.grey.shade400,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500)),
+                      style: GoogleFonts.inter(
+                          color: AppColors.textPrimary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600)),
                   const Spacer(),
                   state.maybeWhen(
-                    playing: (name, _) => Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: AppColors.scoreGreen.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Text('Playing: $name',
-                          style: TextStyle(
-                              color: AppColors.scoreGreen, fontSize: 11)),
-                    ),
+                    playing: (name, _) => _buildStopButton(context),
+                    paused: (name, _) => _buildStopButton(context),
                     orElse: () => const SizedBox.shrink(),
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 16),
               Wrap(
-                spacing: 8,
-                runSpacing: 8,
+                spacing: 12,
+                runSpacing: 12,
                 children: audioTracks.map((track) {
                   final isPlaying = state.maybeWhen(
                     playing: (name, _) => name == track.name,
@@ -75,52 +68,47 @@ class AudioPlayerWidget extends StatelessWidget {
                     },
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       decoration: BoxDecoration(
-                        color: isPlaying
-                            ? AppColors.primary.withOpacity(0.2)
-                            : isPaused
-                                ? AppColors.scoreAmber.withOpacity(0.1)
-                                : Colors.grey.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(10),
-                        border: isPlaying
-                            ? Border.all(
-                                color: AppColors.primary.withOpacity(0.5))
-                            : null,
+                        color: isPlaying ? AppColors.primary.withOpacity(0.15) : AppColors.surfaceLight,
+                        borderRadius: BorderRadius.circular(12),
+                        border: isPlaying ? Border.all(color: AppColors.primary) : Border.all(color: Colors.transparent),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(track.icon, style: const TextStyle(fontSize: 16)),
-                          const SizedBox(width: 6),
+                          const SizedBox(width: 8),
                           Text(track.name,
-                              style: TextStyle(
-                                color: isPlaying
-                                    ? AppColors.primary
-                                    : AppColors.textPrimary,
-                                fontSize: 12,
-                                fontWeight: isPlaying
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
+                              style: GoogleFonts.inter(
+                                color: isPlaying ? AppColors.textPrimary : AppColors.textSecondary,
+                                fontSize: 13,
+                                fontWeight: isPlaying ? FontWeight.w600 : FontWeight.w500,
                               )),
-                          if (isPlaying) ...[
-                            const SizedBox(width: 4),
-                            Icon(Icons.pause_rounded,
-                                size: 14, color: AppColors.primary),
-                          ],
                         ],
                       ),
                     ),
                   );
                 }).toList(),
               ),
-              // Stop button
-              state.maybeWhen(
-                playing: (_, __) => _buildStopButton(context),
-                paused: (_, __) => _buildStopButton(context),
-                orElse: () => const SizedBox.shrink(),
-              ),
+              const SizedBox(height: 24),
+              Text('VOLUME', style: AppTextStyles.label),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: LinearProgressIndicator(
+                      value: 0.65, // Static for UI mock
+                      backgroundColor: AppColors.surfaceBorder,
+                      color: AppColors.primary,
+                      minHeight: 4,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Text('65%', style: GoogleFonts.inter(fontSize: 12, color: AppColors.primaryLight, fontWeight: FontWeight.w600)),
+                ],
+              )
             ],
           ),
         );

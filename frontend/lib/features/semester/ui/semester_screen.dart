@@ -18,7 +18,7 @@ class SemesterScreen extends StatelessWidget {
       builder: (dialogContext) => AlertDialog(
         backgroundColor: AppColors.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('New Semester Goal', style: AppTextStyles.h2),
+        title: Text('New Semester Goal', style: AppTextStyles.h2),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -55,7 +55,7 @@ class SemesterScreen extends StatelessWidget {
               backgroundColor: AppColors.primary,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
-            child: const Text('Create'),
+            child: Text('Create'),
           ),
         ],
       ),
@@ -83,7 +83,7 @@ class SemesterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Semester Goals', style: AppTextStyles.h2),
+        title: Text('Semester Goals', style: AppTextStyles.h2),
         backgroundColor: AppColors.background,
         elevation: 0,
       ),
@@ -107,7 +107,7 @@ class SemesterScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => context.read<SemesterCubit>().loadGoals(),
-                    child: const Text('Retry'),
+                    child: Text('Retry'),
                   ),
                 ],
               ),
@@ -120,9 +120,9 @@ class SemesterScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.school_outlined, size: 64, color: Colors.grey.shade600),
                       const SizedBox(height: 16),
-                      const Text('No semester goals yet', style: AppTextStyles.bodySecondary),
+                      Text('No semester goals yet', style: AppTextStyles.bodySecondary),
                       const SizedBox(height: 8),
-                      const Text('Tap + to add your first semester goal!', style: AppTextStyles.bodySecondary),
+                      Text('Tap + to add your first semester goal!', style: AppTextStyles.bodySecondary),
                     ],
                   ),
                 );

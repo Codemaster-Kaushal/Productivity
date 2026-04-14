@@ -43,7 +43,7 @@ class GoalsRepository {
       'subject': subject,
       'date': today,
       'is_completed': false,
-      if (semesterGoalId != null) 'semester_goal_id': semesterGoalId,
+      'semester_goal_id': ?semesterGoalId,
     });
   }
 

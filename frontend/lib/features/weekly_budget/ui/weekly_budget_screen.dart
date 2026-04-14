@@ -19,7 +19,7 @@ class WeeklyBudgetScreen extends StatelessWidget {
           backgroundColor: AppColors.surface,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16)),
-          title: const Text('Set Weekly Target', style: AppTextStyles.h2),
+          title: Text('Set Weekly Target', style: AppTextStyles.h2),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -85,7 +85,7 @@ class WeeklyBudgetScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
               ),
-              child: const Text('Save'),
+              child: Text('Save'),
             ),
           ],
         ),
@@ -97,7 +97,7 @@ class WeeklyBudgetScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Weekly Budget', style: AppTextStyles.h2),
+        title: Text('Weekly Budget', style: AppTextStyles.h2),
         backgroundColor: AppColors.background,
         elevation: 0,
       ),
@@ -123,10 +123,10 @@ class WeeklyBudgetScreen extends StatelessWidget {
                       Icon(Icons.calendar_view_week,
                           size: 64, color: Colors.grey.shade600),
                       const SizedBox(height: 16),
-                      const Text('No weekly targets set',
+                      Text('No weekly targets set',
                           style: AppTextStyles.bodySecondary),
                       const SizedBox(height: 8),
-                      const Text('Tap + to plan your study week!',
+                      Text('Tap + to plan your study week!',
                           style: AppTextStyles.bodySecondary),
                     ],
                   ),

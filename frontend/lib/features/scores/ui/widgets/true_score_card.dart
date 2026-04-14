@@ -103,7 +103,7 @@ class _TrueScoreCardState extends State<TrueScoreCard> with SingleTickerProvider
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            const Text('True Score', style: AppTextStyles.h2),
+            Text('True Score', style: AppTextStyles.h2),
             const SizedBox(height: 16),
             AnimatedBuilder(
               animation: _animation,

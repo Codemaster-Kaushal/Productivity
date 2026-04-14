@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'core/router/app_router.dart';
+import 'core/theme/aurora_theme.dart';
 import 'features/auth/data/auth_repository.dart';
 import 'features/auth/cubit/auth_cubit.dart';
 import 'features/dashboard/data/dashboard_repository.dart';
@@ -106,17 +107,9 @@ class ProductivityApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Productivity',
+      title: 'Celestial Productivity',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        colorScheme: ColorScheme.dark(
-          primary: const Color(0xFF6C63FF),
-          secondary: const Color(0xFF03DAC6),
-          surface: const Color(0xFF1E1E2E),
-        ),
-        scaffoldBackgroundColor: const Color(0xFF0F0F1A),
-        cardColor: const Color(0xFF1E1E2E),
-      ),
+      theme: AuroraTheme.themeData,
       routerConfig: appRouter,
     );
   }

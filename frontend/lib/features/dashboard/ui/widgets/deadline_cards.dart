@@ -24,7 +24,7 @@ class DeadlineCards extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: deadlines.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 10),
+            separatorBuilder: (_, _) => const SizedBox(width: 10),
             itemBuilder: (context, index) {
               final d = deadlines[index];
               final title = d['title'] ?? 'Untitled';

@@ -11,7 +11,7 @@ class ScoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Score History', style: AppTextStyles.h2), backgroundColor: AppColors.background, elevation: 0),
+      appBar: AppBar(title: Text('Score History', style: AppTextStyles.h2), backgroundColor: AppColors.background, elevation: 0),
       body: BlocBuilder<ScoresCubit, ScoresState>(
         builder: (context, state) {
           return state.when(
@@ -19,7 +19,7 @@ class ScoresScreen extends StatelessWidget {
             loading: () => const Center(child: CircularProgressIndicator()),
             error: (msg) => Center(child: Text(msg, style: const TextStyle(color: AppColors.scoreRed))),
             loaded: (todayScore, history) {
-              if (history.isEmpty) return const Center(child: Text('No scores yet.', style: AppTextStyles.bodySecondary));
+              if (history.isEmpty) return Center(child: Text('No scores yet.', style: AppTextStyles.bodySecondary));
               return ListView.builder(
                 padding: const EdgeInsets.all(16),
                 itemCount: history.length,
