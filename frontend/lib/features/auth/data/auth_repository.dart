@@ -9,7 +9,7 @@ class AuthRepository {
     await _supabase.auth.signInWithOAuth(
       OAuthProvider.google,
       redirectTo: kIsWeb
-          ? 'http://localhost:64465'
+          ? null // Supabase will redirect back to the current origin automatically
           : 'io.supabase.productivity://login-callback',
       scopes: [
         'openid',
