@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "buildCommand": "cd frontend && bash build.sh",
+  "outputDirectory": "frontend/build/web",
+  "framework": null,
+  "installCommand": "echo 'No install needed'"
+}
