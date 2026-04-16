@@ -166,13 +166,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Dashboard',
-              style: GoogleFonts.spaceGrotesk(
-                fontSize: 40,
-                fontWeight: FontWeight.w700,
-                color: AppColors.onSurface,
-              ),
+            Row(
+              children: [
+                Text(
+                  'Dashboard',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.onSurface,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Tooltip(
+                  message: 'Sync Google Calendar & Tasks',
+                 child: IconButton(
+                    onPressed: _reload,
+                    icon: Icon(Icons.sync_rounded, color: AppColors.secondary),
+                    style: IconButton.styleFrom(
+                      backgroundColor: AppColors.surfaceVariant.withOpacity(0.5),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 6),
             Text(

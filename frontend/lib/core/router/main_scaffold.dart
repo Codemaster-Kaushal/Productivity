@@ -2,6 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/auth/data/auth_repository.dart';
+import '../constants/app_text_styles.dart';
 import '../constants/app_colors.dart';
 
 class MainScaffold extends StatelessWidget {
@@ -146,7 +149,26 @@ class MainScaffold extends StatelessWidget {
                             onPressed: () {},
                           ),
                           SizedBox(width: 16),
-                          Container(
+                          PopupMenuButton<String>(
+                            offset: const Offset(0, 48),
+                            color: AppColors.surfaceContainerHigh,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            onSelected: (value) async {
+                              if (value == 'logout') {
+                                await context.read<AuthRepository>().signOut();
+                              }
+                            },
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 'settings',
+                                child: Text('Settings', style: AppTextStyles.bodyPrimary),
+                              ),
+                              PopupMenuItem(
+                                value: 'logout',
+                                child: Text('Logout', style: AppTextStyles.bodyPrimary.copyWith(color: AppColors.error)),
+                              ),
+                            ],
+                            child: Container(
                             width: 32,
                             height: 32,
                             decoration: BoxDecoration(
@@ -157,6 +179,7 @@ class MainScaffold extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
+                          ),
                           )
                         ],
                       )
