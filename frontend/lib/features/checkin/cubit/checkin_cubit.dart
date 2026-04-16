@@ -29,6 +29,32 @@ class CheckinCubit extends Cubit<CheckinState> {
     }
   }
 
+  Future<void> saveMetric({
+    required String metric,
+    required int value,
+    String? note,
+  }) async {
+    emit(const CheckinState.saving());
+    try {
+      await _repository.saveMetric(metric: metric, value: value, note: note);
+      emit(const CheckinState.saved());
+    } catch (e, stack) {
+      Sentry.captureException(e, stackTrace: stack);
+      emit(const CheckinState.error('Failed to record reflection metric.'));
+    }
+  }
+
+  Future<void> saveJournal(String content) async {
+    emit(const CheckinState.saving());
+    try {
+      await _repository.saveJournalNote(content);
+      emit(const CheckinState.saved());
+    } catch (e, stack) {
+      Sentry.captureException(e, stackTrace: stack);
+      emit(const CheckinState.error('Failed to record reflection journal.'));
+    }
+  }
+
   void reset() {
     emit(const CheckinState.initial());
   }

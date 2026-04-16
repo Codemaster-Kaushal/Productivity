@@ -113,6 +113,8 @@ class QuickCaptureRepository {
 
   Future<void> saveCapture(ParsedCapture capture) async {
     final today = DateTime.now().toIso8601String().split('T')[0];
+    final taskDate =
+        (capture.dueDate ?? DateTime.now()).toIso8601String().split('T')[0];
 
     if (capture.type == 'goal') {
       await _supabase.from('goals').insert({
@@ -126,11 +128,8 @@ class QuickCaptureRepository {
       await _supabase.from('tasks').insert({
         'user_id': _userId,
         'title': capture.title,
-        'date': today,
+        'date': capture.dueDate != null ? taskDate : today,
         'is_completed': false,
-        'source': 'quick_capture',
-        if (capture.dueDate != null)
-          'due_date': capture.dueDate!.toIso8601String().split('T')[0],
       });
     }
   }

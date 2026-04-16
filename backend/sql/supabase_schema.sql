@@ -13,6 +13,9 @@ CREATE TABLE user_profiles (
   shield_count INTEGER NOT NULL DEFAULT 0,
   total_xp INTEGER NOT NULL DEFAULT 0,
   level TEXT NOT NULL DEFAULT 'Freshman',
+  google_access_token TEXT,
+  google_refresh_token TEXT,
+  google_token_expires_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 

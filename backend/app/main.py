@@ -18,6 +18,7 @@ from app.routes.semester import router as semester_router, milestone_router
 from app.routes.streaks import router as streaks_router, exam_router
 from app.routes.sync import router as sync_router
 from app.routes.calendar import router as calendar_router
+from app.routes.ai import router as ai_router
 
 
 settings = get_settings()
@@ -67,6 +68,7 @@ app.include_router(streaks_router)
 app.include_router(exam_router)
 app.include_router(sync_router)
 app.include_router(calendar_router)
+app.include_router(ai_router)
 
 
 @app.get("/")

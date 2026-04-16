@@ -6,13 +6,13 @@ import '../constants/app_colors.dart';
 
 class MainScaffold extends StatelessWidget {
   final Widget child;
-  MainScaffold({super.key, required this.child});
+  const MainScaffold({super.key, required this.child});
 
   static const _tabs = [
-    _NavItem('/dashboard', Icons.timer, 'Focus'),
-    _NavItem('/goals', Icons.auto_stories, 'Vault'),
+    _NavItem('/dashboard', Icons.dashboard_rounded, 'Dashboard'),
+    _NavItem('/goals', Icons.flag_rounded, 'Focus'),
     _NavItem('/pomodoro', Icons.add_circle, 'Capture', isLarge: true),
-    _NavItem('/checkin', Icons.insights, 'Insights'),
+    _NavItem('/checkin', Icons.insights_rounded, 'Reflection'),
     _NavItem('/semester', Icons.settings, 'Settings'),
   ];
 
@@ -24,9 +24,32 @@ class MainScaffold extends StatelessWidget {
     return 0;
   }
 
+  String _currentTitle(BuildContext context) {
+    final location = GoRouterState.of(context).matchedLocation;
+    for (final tab in _tabs) {
+      if (location.startsWith(tab.path)) {
+        return tab.label;
+      }
+    }
+
+    switch (location) {
+      case '/journal':
+        return 'Journal';
+      case '/scores':
+        return 'Score History';
+      case '/friends':
+        return 'Friends';
+      case '/budget':
+        return 'Budget';
+      default:
+        return 'Dashboard';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentIdx = _currentIndex(context);
+    final currentTitle = _currentTitle(context);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -105,7 +128,7 @@ class MainScaffold extends StatelessWidget {
                             border: Border(bottom: BorderSide(color: AppColors.secondary, width: 2))
                           ),
                           child: Text(
-                            'Dashboard',
+                            currentTitle,
                             style: GoogleFonts.inter(
                               color: AppColors.secondary,
                               fontWeight: FontWeight.bold,

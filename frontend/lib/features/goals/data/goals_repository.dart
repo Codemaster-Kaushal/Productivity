@@ -37,14 +37,17 @@ class GoalsRepository {
     String? semesterGoalId,
   }) async {
     final today = DateTime.now().toIso8601String().split('T')[0];
-    await _supabase.from('goals').insert({
+    final payload = <String, dynamic>{
       'user_id': _userId,
       'title': title,
       'subject': subject,
       'date': today,
       'is_completed': false,
-      'semester_goal_id': ?semesterGoalId,
-    });
+    };
+    if (semesterGoalId != null && semesterGoalId.isNotEmpty) {
+      payload['semester_goal_id'] = semesterGoalId;
+    }
+    await _supabase.from('goals').insert(payload);
   }
 
   Future<void> completeGoal(String goalId) async {
@@ -52,6 +55,21 @@ class GoalsRepository {
         .from('goals')
         .update({'is_completed': true})
         .eq('id', goalId);
+  }
+
+  Future<void> updateGoal({
+    required String goalId,
+    required String title,
+    required String subject,
+  }) async {
+    await _supabase
+        .from('goals')
+        .update({
+          'title': title,
+          'subject': subject,
+        })
+        .eq('id', goalId)
+        .eq('user_id', _userId);
   }
 
   Future<void> uncompleteGoal(String goalId) async {

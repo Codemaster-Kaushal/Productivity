@@ -37,6 +37,21 @@ class GoalsCubit extends Cubit<GoalsState> {
     } catch (_) {}
   }
 
+  Future<void> updateGoal({
+    required String goalId,
+    required String title,
+    required String subject,
+  }) async {
+    try {
+      await _repository.updateGoal(
+        goalId: goalId,
+        title: title,
+        subject: subject,
+      );
+      await loadTodayGoals();
+    } catch (_) {}
+  }
+
   Future<void> uncompleteGoal(String goalId) async {
     try {
       await _repository.uncompleteGoal(goalId);

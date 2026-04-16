@@ -125,7 +125,9 @@ async def update_streak(
     yesterday_was_exam = await check_exam_day(user_id, yesterday, db)
 
     if threshold_met:
-        if profile.last_active_date in (yesterday, target_date) or yesterday_was_exam:
+        if profile.last_active_date == target_date:
+            return
+        if profile.last_active_date == yesterday or yesterday_was_exam:
             profile.current_streak += 1
         else:
             profile.current_streak = 1  # reset — gap detected
@@ -138,6 +140,8 @@ async def update_streak(
         elif profile.current_streak == 30:
             profile.shield_count = min(profile.shield_count + 2, 3)
     else:
+        if profile.last_active_date == target_date:
+            return
         if profile.shield_count > 0:
             profile.shield_count -= 1  # burn a shield, streak survives
         else:

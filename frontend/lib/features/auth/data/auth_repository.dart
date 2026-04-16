@@ -15,7 +15,7 @@ class AuthRepository {
         'openid',
         'email',
         'profile',
-        'https://www.googleapis.com/auth/calendar.readonly',
+        'https://www.googleapis.com/auth/calendar.events',
         'https://www.googleapis.com/auth/fitness.activity.read',
       ].join(' '),
     );

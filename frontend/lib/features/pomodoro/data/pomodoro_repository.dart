@@ -45,4 +45,46 @@ class PomodoroRepository {
     final sessions = await getTodaySessions();
     return sessions.fold<int>(0, (int sum, s) => sum + s.durationMinutes);
   }
+
+  Future<int> getCurrentStreak() async {
+    try {
+      final response = await _supabase
+          .from('user_profiles')
+          .select('current_streak')
+          .eq('id', _userId)
+          .single();
+      return (response['current_streak'] as num?)?.toInt() ?? 0;
+    } catch (_) {
+      return 0;
+    }
+  }
+
+  Future<List<int>> getLast7FocusMinutes() async {
+    final now = DateTime.now();
+    final start = now.subtract(const Duration(days: 6));
+
+    try {
+      final response = await _supabase
+          .from('pomodoro_sessions')
+          .select('duration_minutes, started_at, completed_at')
+          .eq('user_id', _userId)
+          .gte('started_at', '${start.toIso8601String().split('T')[0]}T00:00:00')
+          .not('completed_at', 'is', null)
+          .order('started_at');
+
+      final totals = List<int>.filled(7, 0);
+      for (final row in response as List) {
+        final startedAt = DateTime.parse(row['started_at'] as String);
+        final dayIndex = startedAt
+            .difference(DateTime(start.year, start.month, start.day))
+            .inDays;
+        if (dayIndex >= 0 && dayIndex < totals.length) {
+          totals[dayIndex] += (row['duration_minutes'] as num?)?.toInt() ?? 0;
+        }
+      }
+      return totals;
+    } catch (_) {
+      return List<int>.filled(7, 0);
+    }
+  }
 }

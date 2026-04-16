@@ -7,7 +7,7 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/theme/aurora_theme.dart';
 
 class CheckinScreen extends StatefulWidget {
-  CheckinScreen({super.key});
+  const CheckinScreen({super.key});
 
   @override
   State<CheckinScreen> createState() => _CheckinScreenState();
@@ -42,6 +42,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
         listener: (context, state) {
           state.maybeWhen(
             saved: () {
+              final checkinCubit = context.read<CheckinCubit>();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Reflection synced to vault. ✨'),
@@ -50,7 +51,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
                 ),
               );
               Future.delayed(Duration(seconds: 1), () {
-                if (mounted) context.read<CheckinCubit>().reset();
+                if (mounted) checkinCubit.reset();
               });
             },
             error: (msg) {
@@ -93,21 +94,21 @@ class _CheckinScreenState extends State<CheckinScreen> {
                     if (isWide) {
                       return Row(
                         children: [
-                          Expanded(child: _buildMetricCard('Energy', '01', Icons.bolt, 'How much vital force did you feel flowing through your tasks?', 'STATIC', 'KINETIC', _energy, (v) => setState(() => _energy = v))),
+                          Expanded(child: _buildMetricCard('Energy', 'energy', '01', Icons.bolt, 'How much vital force did you feel flowing through your tasks?', 'STATIC', 'KINETIC', _energy, (v) => setState(() => _energy = v))),
                           SizedBox(width: 16),
-                          Expanded(child: _buildMetricCard('Focus', '02', Icons.center_focus_strong, 'Degree of immersion in your deep work and intentional moments.', 'DIFFUSE', 'LASER', _focus, (v) => setState(() => _focus = v))),
+                          Expanded(child: _buildMetricCard('Focus', 'focus', '02', Icons.center_focus_strong, 'Degree of immersion in your deep work and intentional moments.', 'DIFFUSE', 'LASER', _focus, (v) => setState(() => _focus = v))),
                           SizedBox(width: 16),
-                          Expanded(child: _buildMetricCard('Mood', '03', Icons.auto_awesome, 'The emotional resonance of your day. High or low frequency?', 'MELANCHOLY', 'EUPHORIA', _mood, (v) => setState(() => _mood = v))),
+                          Expanded(child: _buildMetricCard('Mood', 'mood', '03', Icons.auto_awesome, 'The emotional resonance of your day. High or low frequency?', 'MELANCHOLY', 'EUPHORIA', _mood, (v) => setState(() => _mood = v))),
                         ],
                       );
                     } else {
                       return Column(
                         children: [
-                          _buildMetricCard('Energy', '01', Icons.bolt, 'How much vital force did you feel flowing through your tasks?', 'STATIC', 'KINETIC', _energy, (v) => setState(() => _energy = v)),
+                          _buildMetricCard('Energy', 'energy', '01', Icons.bolt, 'How much vital force did you feel flowing through your tasks?', 'STATIC', 'KINETIC', _energy, (v) => setState(() => _energy = v)),
                           SizedBox(height: 16),
-                          _buildMetricCard('Focus', '02', Icons.center_focus_strong, 'Degree of immersion in your deep work and intentional moments.', 'DIFFUSE', 'LASER', _focus, (v) => setState(() => _focus = v)),
+                          _buildMetricCard('Focus', 'focus', '02', Icons.center_focus_strong, 'Degree of immersion in your deep work and intentional moments.', 'DIFFUSE', 'LASER', _focus, (v) => setState(() => _focus = v)),
                           SizedBox(height: 16),
-                          _buildMetricCard('Mood', '03', Icons.auto_awesome, 'The emotional resonance of your day. High or low frequency?', 'MELANCHOLY', 'EUPHORIA', _mood, (v) => setState(() => _mood = v)),
+                          _buildMetricCard('Mood', 'mood', '03', Icons.auto_awesome, 'The emotional resonance of your day. High or low frequency?', 'MELANCHOLY', 'EUPHORIA', _mood, (v) => setState(() => _mood = v)),
                         ],
                       );
                     }
@@ -140,20 +141,24 @@ class _CheckinScreenState extends State<CheckinScreen> {
                             ),
                           ),
                           SizedBox(height: 16),
-                          Row(
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
                             children: [
                               AuroraTheme.statusTag('#productivity', color: AppColors.textSecondary),
-                              SizedBox(width: 8),
                               AuroraTheme.statusTag('#alignment', color: AppColors.textSecondary),
-                              SizedBox(width: 8),
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: AppColors.surfaceBorder,
-                                  borderRadius: BorderRadius.circular(16)
+                              SizedBox(
+                                width: 180,
+                                child: AuroraTheme.outlinedButton(
+                                  text: 'Record Journal',
+                                  onPressed: () {
+                                    final content = _noteController.text.trim();
+                                    if (content.isNotEmpty) {
+                                      context.read<CheckinCubit>().saveJournal(content);
+                                    }
+                                  },
                                 ),
-                                child: Text('Add Tag +', style: AppTextStyles.caption.copyWith(color: AppColors.textPrimary)),
-                              )
+                              ),
                             ],
                           )
                         ],
@@ -222,7 +227,7 @@ class _CheckinScreenState extends State<CheckinScreen> {
     );
   }
 
-  Widget _buildMetricCard(String title, String numId, IconData icon, String desc, String leftLabel, String rightLabel, int value, ValueChanged<int> onChanged) {
+  Widget _buildMetricCard(String title, String metricKey, String numId, IconData icon, String desc, String leftLabel, String rightLabel, int value, ValueChanged<int> onChanged) {
     return Container(
       decoration: AuroraTheme.card,
       padding: const EdgeInsets.all(24),
@@ -264,7 +269,21 @@ class _CheckinScreenState extends State<CheckinScreen> {
               Text(leftLabel, style: AppTextStyles.label),
               Text(rightLabel, style: AppTextStyles.label),
             ],
-          )
+          ),
+          SizedBox(height: 18),
+          SizedBox(
+            width: double.infinity,
+            child: AuroraTheme.outlinedButton(
+              text: 'Record $title',
+              onPressed: () {
+                context.read<CheckinCubit>().saveMetric(
+                      metric: metricKey,
+                      value: value,
+                      note: _noteController.text.trim(),
+                    );
+              },
+            ),
+          ),
         ],
       ),
     );
