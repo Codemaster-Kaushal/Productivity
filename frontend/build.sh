@@ -1,11 +1,17 @@
 #!/bin/bash
-# Clone Flutter with depth 1 to save massive download time and Vercel disk space
-if [ ! -d "flutter" ]; then
-  git clone https://github.com/flutter/flutter.git -b stable --depth 1
+set -e  # Exit on any error so Vercel shows build failures
+
+# Always use a fresh Flutter SDK to avoid cache issues
+if [ -d "flutter" ]; then
+  echo "Removing cached Flutter SDK..."
+  rm -rf flutter
 fi
 
+echo "Cloning Flutter stable..."
+git clone https://github.com/flutter/flutter.git -b stable --depth 1
+
 # Add Flutter to the PATH
-export PATH="$PATH:`pwd`/flutter/bin"
+export PATH="$PATH:$(pwd)/flutter/bin"
 
 # Disable analytics to prevent CI prompts from hanging the build
 flutter config --no-analytics
@@ -13,7 +19,7 @@ flutter config --no-analytics
 # Pre-download binaries specifically for web
 flutter precache --web
 
-# Create dummy env files and populate with Vercel environment variables
+# Create env files and populate with Vercel environment variables
 echo "SUPABASE_URL=$SUPABASE_URL" > .env
 echo "SUPABASE_KEY=$SUPABASE_KEY" >> .env
 echo "SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY" >> .env
@@ -22,4 +28,4 @@ touch .env.example
 
 # Get dependencies and build
 flutter pub get
-flutter build web --release
+flutter build web --release --no-tree-shake-icons
