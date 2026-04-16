@@ -19,6 +19,10 @@ class AuthRepository {
         'https://www.googleapis.com/auth/fitness.activity.read',
         'https://www.googleapis.com/auth/tasks',
       ].join(' '),
+      queryParams: {
+        'access_type': 'offline',
+        'prompt': 'consent',
+      },
     );
   }
 
@@ -27,19 +31,22 @@ class AuthRepository {
     final providerRefreshToken = session.providerRefreshToken;
     if (providerToken == null) return;
 
-    await _supabase.from('user_profiles').upsert({
-      'id': session.user.id,
-      'google_access_token': providerToken,
-      'google_refresh_token': providerRefreshToken,
-      'google_token_expires_at': DateTime.now()
-          .add(const Duration(hours: 1))
-          .toIso8601String(),
-    });
+    try {
+      await _supabase.from('user_profiles').update({
+        'google_access_token': providerToken,
+        'google_refresh_token': providerRefreshToken,
+        'google_token_expires_at': DateTime.now()
+            .add(const Duration(hours: 1))
+            .toIso8601String(),
+      }).eq('id', session.user.id);
+    } catch (e) {
+      debugPrint('Error saving provider tokens: $e');
+    }
   }
 
   Future<void> handleAuthCallback(Session session) async {
-    await _saveProviderTokens(session);
     await _ensureUserProfile(session.user);
+    await _saveProviderTokens(session);
   }
 
   Future<void> _ensureUserProfile(User user) async {
