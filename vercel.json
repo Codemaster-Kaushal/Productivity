@@ -1,7 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && bash build.sh",
-  "outputDirectory": "frontend/build/web",
-  "framework": null,
-  "installCommand": "echo 'No install needed'"
+  "buildCommand": "echo 'Pre-built package, skipping build'",
+  "outputDirectory": "frontend/public",
+  "framework": null
 }
