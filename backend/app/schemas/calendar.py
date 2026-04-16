@@ -7,3 +7,5 @@ class TaskCalendarSyncRequest(BaseModel):
     date: date
     task_id: str | None = None
     notes: str | None = None
+    is_completed: bool = False
+

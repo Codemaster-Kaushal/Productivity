@@ -116,6 +116,10 @@ class DashboardRepository {
     final selectedMonth = DateTime(month?.year ?? now.year, month?.month ?? now.month);
     final today = _isoDate(now);
 
+    try {
+      await _dioClient.get('/calendar/tasks/pull');
+    } catch (_) {}
+
     final Future<List<dynamic>> tasksFuture = _supabase
         .from('tasks')
         .select('id, title, date, is_completed, created_at')
@@ -241,6 +245,10 @@ class DashboardRepository {
         .update({'is_completed': isCompleted})
         .eq('id', taskId)
         .eq('user_id', _userId);
+
+    final row = await _supabase.from('tasks').select('id, title, date, is_completed, created_at').eq('id', taskId).single();
+    final task = DashboardTaskItem.fromRow(Map<String, dynamic>.from(row as Map));
+    unawaited(_syncTaskToGoogleCalendar(task));
   }
 
   Future<void> deleteTodayTask(String taskId) async {
@@ -466,6 +474,7 @@ class DashboardRepository {
           'task_id': task.id,
           'title': task.title,
           'date': _isoDate(task.date),
+          'is_completed': task.isCompleted,
         },
       );
     } on DioException {

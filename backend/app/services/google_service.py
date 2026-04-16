@@ -13,9 +13,12 @@ from app.models.user import UserProfile
 class GoogleService:
     CALENDAR_BASE = "https://www.googleapis.com/calendar/v3"
     FIT_BASE = "https://www.googleapis.com/fitness/v1/users/me"
+    TASKS_BASE = "https://tasks.googleapis.com/tasks/v1"
 
     async def get_valid_token(self, user_id: str, db: AsyncSession) -> str | None:
-        result = await db.execute(select(UserProfile).where(UserProfile.id == user_id))
+        import uuid
+        uid = uuid.UUID(str(user_id))
+        result = await db.execute(select(UserProfile).where(UserProfile.id == uid))
         profile = result.scalar_one_or_none()
         if not profile or not profile.google_access_token:
             return None
@@ -79,7 +82,7 @@ class GoogleService:
                 f"{self.FIT_BASE}/dataset:aggregate",
                 headers={"Authorization": f"Bearer {token}"},
                 json={
-                    "aggregateBy": [{"dataTypeName": "com.google.step_count.delta"}],
+                    "aggregateBy": [{"dataTypeName": "com.google.step_count.delta", "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"}],
                     "bucketByTime": {"durationMillis": 86400000},
                     "startTimeMillis": int(midnight.timestamp() * 1000),
                     "endTimeMillis": int(now.timestamp() * 1000),
@@ -171,3 +174,77 @@ class GoogleService:
             return None
 
         return response.json()
+
+    async def get_todays_google_tasks(self, user_id: str, db: AsyncSession) -> list[dict]:
+        token = await self.get_valid_token(user_id, db)
+        if not token:
+            return []
+
+        today = date.today()
+        start = datetime.combine(today, time.min, tzinfo=timezone.utc)
+        end = datetime.combine(today, time.max, tzinfo=timezone.utc)
+
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            response = await client.get(
+                f"{self.TASKS_BASE}/lists/@default/tasks",
+                headers={"Authorization": f"Bearer {token}"},
+                params={
+                    "dueMin": start.isoformat().replace("+00:00", "Z"),
+                    "dueMax": end.isoformat().replace("+00:00", "Z"),
+                    "showCompleted": True,
+                    "showHidden": True,
+                },
+            )
+
+        if response.status_code != 200:
+            return []
+
+        return response.json().get("items", [])
+
+    async def sync_google_task(
+        self,
+        user_id: str,
+        title: str,
+        task_date: date,
+        is_completed: bool,
+        db: AsyncSession,
+        *,
+        google_task_id: str | None = None,
+        notes: str | None = None,
+    ) -> dict | None:
+        token = await self.get_valid_token(user_id, db)
+        if not token:
+            return None
+
+        # Format date as RFC 3339 timestamp for due date
+        due_date = datetime.combine(task_date, time.min, tzinfo=timezone.utc).isoformat().replace("+00:00", "Z")
+
+        payload = {
+            "title": title,
+            "notes": notes or "Synced from Celestial Productivity",
+            "due": due_date,
+            "status": "completed" if is_completed else "needsAction",
+        }
+
+        async with httpx.AsyncClient(timeout=20.0) as client:
+            if google_task_id:
+                # Update existing task
+                payload["id"] = google_task_id
+                response = await client.put(
+                    f"{self.TASKS_BASE}/lists/@default/tasks/{google_task_id}",
+                    headers={"Authorization": f"Bearer {token}"},
+                    json=payload,
+                )
+            else:
+                # Create new task
+                response = await client.post(
+                    f"{self.TASKS_BASE}/lists/@default/tasks",
+                    headers={"Authorization": f"Bearer {token}"},
+                    json=payload,
+                )
+
+        if response.status_code not in (200, 201):
+            return None
+
+        return response.json()
+

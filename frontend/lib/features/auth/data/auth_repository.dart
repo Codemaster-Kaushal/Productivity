@@ -17,6 +17,7 @@ class AuthRepository {
         'profile',
         'https://www.googleapis.com/auth/calendar.events',
         'https://www.googleapis.com/auth/fitness.activity.read',
+        'https://www.googleapis.com/auth/tasks',
       ].join(' '),
     );
   }

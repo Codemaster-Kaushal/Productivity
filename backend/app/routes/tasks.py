@@ -103,7 +103,7 @@ async def complete_task(
     except Exception as e:
         sentry_sdk.capture_exception(e)
         await db.rollback()
-        raise HTTPException(status_code=500, detail="Failed to complete task")
+        raise e
 
 
 @router.delete("/{task_id}")
