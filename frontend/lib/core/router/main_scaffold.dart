@@ -58,8 +58,7 @@ class MainScaffold extends StatelessWidget {
       backgroundColor: AppColors.background,
       body: Stack(
         children: [
-          // Background aurora blur container matching HTML:
-          // background: radial-gradient(circle at 50% -20%, rgba(186, 158, 255, 0.15) 0%, rgba(236, 99, 255, 0.05) 50%, transparent 100%);
+          // Background aurora blur
           Positioned(
             top: -200,
             left: MediaQuery.of(context).size.width / 2 - 300,
@@ -79,11 +78,11 @@ class MainScaffold extends StatelessWidget {
               ),
             ),
           ),
-          
-          // Page Content padding top to avoid fixed nav
+
+          // Page Content
           Positioned.fill(
             child: Padding(
-              padding: const EdgeInsets.only(top: 80, bottom: 120), // Leave room for padding & bottom pill
+              padding: const EdgeInsets.only(top: 80, bottom: 120),
               child: child,
             ),
           ),
@@ -95,19 +94,19 @@ class MainScaffold extends StatelessWidget {
             right: 0,
             child: ClipRect(
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0), // backdrop-blur-xl
+                filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
                 child: Container(
-                  height: 64, // h-16
+                  height: 64,
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   decoration: BoxDecoration(
-                    color: Color(0xFF0E0E11).withOpacity(0.6), // bg-[#0e0e11]/60
+                    color: const Color(0xFF0E0E11).withOpacity(0.6),
                     boxShadow: const [
                       BoxShadow(
-                        color: Color.fromRGBO(132, 85, 239, 0.06), // from HTML shadow
+                        color: Color.fromRGBO(132, 85, 239, 0.06),
                         offset: Offset(0, 8),
                         blurRadius: 32,
                       )
-                    ]
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,19 +115,24 @@ class MainScaffold extends StatelessWidget {
                       Text(
                         'Celestial Productivity',
                         style: GoogleFonts.inter(
-                          fontSize: 20, // text-xl
+                          fontSize: 20,
                           fontWeight: FontWeight.w600,
-                          letterSpacing: -0.5, // tracking-tighter
-                          color: AppColors.primary, // text-[#ba9eff]
+                          letterSpacing: -0.5,
+                          color: AppColors.primary,
                         ),
                       ),
-                      
+
                       // Desktop Links (hidden on very small viewports)
                       if (MediaQuery.of(context).size.width > 768)
                         Container(
                           padding: const EdgeInsets.only(bottom: 4),
                           decoration: BoxDecoration(
-                            border: Border(bottom: BorderSide(color: AppColors.secondary, width: 2))
+                            border: Border(
+                              bottom: BorderSide(
+                                color: AppColors.secondary,
+                                width: 2,
+                              ),
+                            ),
                           ),
                           child: Text(
                             currentTitle,
@@ -139,7 +143,8 @@ class MainScaffold extends StatelessWidget {
                             ),
                           ),
                         )
-                      else SizedBox(),
+                      else
+                        const SizedBox(),
 
                       // Right Icons / Profile
                       Row(
@@ -148,11 +153,13 @@ class MainScaffold extends StatelessWidget {
                             icon: Icon(Icons.notifications, color: AppColors.onSurfaceVariant),
                             onPressed: () {},
                           ),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           PopupMenuButton<String>(
                             offset: const Offset(0, 48),
                             color: AppColors.surfaceContainerHigh,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             onSelected: (value) async {
                               if (value == 'logout') {
                                 await context.read<AuthRepository>().signOut();
@@ -165,24 +172,33 @@ class MainScaffold extends StatelessWidget {
                               ),
                               PopupMenuItem(
                                 value: 'logout',
-                                child: Text('Logout', style: AppTextStyles.bodyPrimary.copyWith(color: AppColors.error)),
+                                child: Text(
+                                  'Logout',
+                                  style: AppTextStyles.bodyPrimary.copyWith(
+                                    color: AppColors.error,
+                                  ),
+                                ),
                               ),
                             ],
                             child: Container(
-                            width: 32,
-                            height: 32,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: AppColors.outlineVariant.withOpacity(0.3)),
-                              image: DecorationImage(
-                                image: NetworkImage('https://lh3.googleusercontent.com/aida-public/AB6AXuA_kYhRg_39OJdRWlE5gwJsWTeZ2kgG8utFp__DJ7sbEcHOK_6SM0vIoFwUEf0NBdyz3Ag4zh0UjJmS7EQUHLZ2hQQIZNIjFtHaz7c4boNddOtuROCa_MbOHq7TyzC80dbAf02KaHcS_dLYyh28BKyI-tbg6oujHRB3ioeSBP14BxiLlLkJBgpooKH6mM-huyiyyeB3iR9Emhj1qU-fAVclXPI1IitQTli9gEhJ8ERZqhEpuNY59wRqcuGCRov5bli7BAEaEQ9sIzIk'),
-                                fit: BoxFit.cover,
+                              width: 32,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: AppColors.outlineVariant.withOpacity(0.3),
+                                ),
+                                image: const DecorationImage(
+                                  image: NetworkImage(
+                                    'https://lh3.googleusercontent.com/aida-public/AB6AXuA_kYhRg_39OJdRWlE5gwJsWTeZ2kgG8utFp__DJ7sbEcHOK_6SM0vIoFwUEf0NBdyz3Ag4zh0UjJmS7EQUHLZ2hQQIZNIjFtHaz7c4boNddOtuROCa_MbOHq7TyzC80dbAf02KaHcS_dLYyh28BKyI-tbg6oujHRB3ioeSBP14BxiLlLkJBgpooKH6mM-huyiyyeB3iR9Emhj1qU-fAVclXPI1IitQTli9gEhJ8ERZqhEpuNY59wRqcuGCRov5bli7BAEaEQ9sIzIk',
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
-                          )
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -192,7 +208,7 @@ class MainScaffold extends StatelessWidget {
 
           // ── Bottom Pill NavBar ──
           Positioned(
-            bottom: 32, // bottom-8
+            bottom: 32,
             left: 0,
             right: 0,
             child: Align(
@@ -200,22 +216,24 @@ class MainScaffold extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9999),
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 30.0, sigmaY: 30.0), // backdrop-blur-[30px]
+                  filter: ImageFilter.blur(sigmaX: 30.0, sigmaY: 30.0),
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
-                    constraints: BoxConstraints(maxWidth: 448), // max-w-md
+                    constraints: const BoxConstraints(maxWidth: 448),
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                     decoration: BoxDecoration(
-                      color: Color(0xFF25252A).withOpacity(0.6), // bg-[#25252a]/60
+                      color: const Color(0xFF25252A).withOpacity(0.6),
                       borderRadius: BorderRadius.circular(9999),
-                      border: Border.all(color: Color(0xFF48474B).withOpacity(0.15)),
+                      border: Border.all(
+                        color: const Color(0xFF48474B).withOpacity(0.15),
+                      ),
                       boxShadow: const [
                         BoxShadow(
                           color: Color.fromRGBO(0, 0, 0, 0.5),
                           blurRadius: 50,
                           offset: Offset(0, 20),
                         )
-                      ]
+                      ],
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -231,17 +249,21 @@ class MainScaffold extends StatelessWidget {
                             children: [
                               Icon(
                                 tab.icon,
-                                size: tab.isLarge ? 36 : 24, // text-4xl for Capture
-                                color: isActive ? AppColors.secondary : AppColors.onSurfaceVariant,
+                                size: tab.isLarge ? 36 : 24,
+                                color: isActive
+                                    ? AppColors.secondary
+                                    : AppColors.onSurfaceVariant,
                               ),
-                              SizedBox(height: 4),
+                              const SizedBox(height: 4),
                               Text(
                                 tab.label.toUpperCase(),
                                 style: GoogleFonts.inter(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5, // 0.05em
-                                  color: isActive ? AppColors.secondary : AppColors.onSurfaceVariant,
+                                  letterSpacing: 0.5,
+                                  color: isActive
+                                      ? AppColors.secondary
+                                      : AppColors.onSurfaceVariant,
                                 ),
                               ),
                               if (isActive && !tab.isLarge)
@@ -253,12 +275,15 @@ class MainScaffold extends StatelessWidget {
                                     color: AppColors.secondary,
                                     shape: BoxShape.circle,
                                     boxShadow: [
-                                      BoxShadow(color: AppColors.secondary, blurRadius: 8)
-                                    ]
+                                      BoxShadow(
+                                        color: AppColors.secondary,
+                                        blurRadius: 8,
+                                      )
+                                    ],
                                   ),
                                 )
                               else
-                                SizedBox(height: 8),
+                                const SizedBox(height: 8),
                             ],
                           ),
                         );
@@ -268,7 +293,7 @@ class MainScaffold extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

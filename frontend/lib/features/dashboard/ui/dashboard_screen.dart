@@ -21,6 +21,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late final DashboardRepository _repository;
   late DateTime _visibleMonth;
   late Future<DashboardSnapshot> _snapshotFuture;
+  bool _isSyncing = false;
 
   @override
   void initState() {
@@ -43,6 +44,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
       _snapshotFuture = future;
     });
     await future;
+  }
+
+  Future<void> _syncNow() async {
+    setState(() => _isSyncing = true);
+    try {
+      await _reload();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Synced with Google successfully!'),
+            backgroundColor: AppColors.primaryDim,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Sync failed — check your connection.'),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isSyncing = false);
+    }
   }
 
   Future<void> _changeMonth(int delta) async {
@@ -178,14 +209,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 const SizedBox(width: 12),
                 Tooltip(
-                  message: 'Sync Google Calendar & Tasks',
-                 child: IconButton(
-                    onPressed: _reload,
-                    icon: Icon(Icons.sync_rounded, color: AppColors.secondary),
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.surfaceVariant.withOpacity(0.5),
-                    ),
-                  ),
+                  message: 'Sync with Google',
+                  child: _isSyncing
+                      ? SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: AppColors.secondary,
+                            ),
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: _syncNow,
+                          icon: Icon(Icons.sync_rounded, color: AppColors.secondary, size: 26),
+                          style: IconButton.styleFrom(
+                            backgroundColor: AppColors.surfaceVariant.withOpacity(0.5),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
                 ),
               ],
             ),
