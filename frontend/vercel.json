@@ -1,6 +1,0 @@
-{
-  "version": 2,
-  "buildCommand": "echo 'Pre-built package, skipping build'",
-  "outputDirectory": "public",
-  "framework": null
-}
