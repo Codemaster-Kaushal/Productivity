@@ -1,8 +1,5 @@
 {
-  "version": 2,
-  "buildCommand": "echo 'Pre-built package, skipping build'",
-  "outputDirectory": "frontend/public",
-  "framework": null,
+  "framework": "nextjs",
   "headers": [
     {
       "source": "/(.*)",
